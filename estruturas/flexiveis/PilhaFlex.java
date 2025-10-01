@@ -1,3 +1,7 @@
+// Obs: Pilha implementada de forma completa com throw Exception
+// Métodos implementados: Inserir, Remover, Mostrar, Achar o maior, Soma Iterativa e Recursiva,
+// mostrar remoção e inserção e achar o tamanho
+
 public class PilhaFlex {
     private Celula topo;
 
