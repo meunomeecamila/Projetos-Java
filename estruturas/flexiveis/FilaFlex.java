@@ -123,12 +123,6 @@ public class FilaFlex {
             System.out.println(i.elemento);
         }
     }
-
-    //Atv 02 -> mostrar graficamente
-
-    //Atv 03 -> Implemente a fila flexível sem o nó cabeça
-
-    //Atv 04 -> Implemente a pilha flexível sem o nó cabeça
 }
 
 class Celula {
@@ -143,3 +137,98 @@ class Celula {
         this.prox = null;
     }
 }
+
+// ===========================
+// Atv 03 -> Fila flexível SEM nó cabeça
+// ===========================
+class FilaFlexSemCabeca {
+    private Celula frente; // primeiro nó real
+    private Celula tras;   // último nó real
+
+    public FilaFlexSemCabeca() {
+        frente = null;
+        tras   = null;
+    }
+
+    // inserir no fim
+    public void inserir(int x){
+        Celula nova = new Celula(x);
+        if (frente == null) {       // fila vazia
+            frente = nova;
+            tras   = nova;
+        } else {
+            tras.prox = nova;
+            tras = nova;
+        }
+    }
+
+    // remover do início
+    public int remover(){
+        if (frente == null) {       // sem exceptions neste projeto
+            return Integer.MIN_VALUE;
+        }
+        int resp = frente.elemento;
+        Celula tmp = frente;
+        frente = frente.prox;
+        if (frente == null) tras = null; // ficou vazia
+        tmp.prox = null; tmp = null;
+        return resp;
+    }
+
+    // mostrar do início ao fim
+    public void mostrar(){
+        System.out.println("Fila (sem nó cabeça):");
+        for (Celula i = frente; i != null; i = i.prox) {
+            System.out.println(i.elemento);
+        }
+    }
+
+    // util: checar vazia
+    public boolean isVazia(){
+        return frente == null;
+    }
+}
+
+// ===========================
+// Atv 04 -> Pilha flexível SEM nó cabeça
+// ===========================
+class PilhaFlexSemCabeca {
+    private Celula topo; // topo aponta para o primeiro nó real
+
+    public PilhaFlexSemCabeca() {
+        topo = null;
+    }
+
+    // push
+    public void inserir(int x){
+        Celula nova = new Celula(x);
+        nova.prox = topo;
+        topo = nova;
+    }
+
+    // pop
+    public int remover(){
+        if (topo == null) {         // sem exceptions neste projeto
+            return Integer.MIN_VALUE;
+        }
+        int resp = topo.elemento;
+        Celula tmp = topo;
+        topo = topo.prox;
+        tmp.prox = null; tmp = null;
+        return resp;
+    }
+
+    // mostrar do topo até a base
+    public void mostrar(){
+        System.out.println("Pilha (sem nó cabeça):");
+        for (Celula i = topo; i != null; i = i.prox) {
+            System.out.println(i.elemento);
+        }
+    }
+
+    // util: checar vazia
+    public boolean isVazia(){
+        return topo == null;
+    }
+}
+
