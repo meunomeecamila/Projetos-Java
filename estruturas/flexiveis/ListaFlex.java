@@ -4,6 +4,7 @@
 class Lista {
 	private Celula primeiro;
 	private Celula ultimo;
+    private int tamanho = 0;
 
     //Construtor
 	public Lista() {
@@ -20,6 +21,7 @@ class Lista {
 			ultimo = tmp;
 		}
       tmp = null;
+      tamanho++;
 	}
 
 
@@ -27,6 +29,7 @@ class Lista {
 	public void inserirFim(int x) {
 		ultimo.prox = new Celula(x);
 		ultimo = ultimo.prox;
+        tamanho++;
 	}
 
 
@@ -41,7 +44,8 @@ class Lista {
 		int resp = primeiro.elemento;
       tmp.prox = null;
       tmp = null;
-		return resp;
+      tamanho--;
+      return resp;
 	}
 
 	//Remover no fim
@@ -57,8 +61,8 @@ class Lista {
       int resp = ultimo.elemento; 
       ultimo = i; 
       i = ultimo.prox = null;
-      
-		return resp;
+      tamanho--;
+      return resp;
 	}
 
 
@@ -84,6 +88,7 @@ class Lista {
          i.prox = tmp;
          tmp = i = null;
       }
+      tamanho--;
    }
 
 
@@ -113,7 +118,8 @@ class Lista {
          i = tmp = null;
       }
 
-		return resp;
+		tamanho--;
+        return resp;
 	}
 
 	//Mostrar
@@ -139,8 +145,78 @@ class Lista {
 
 	//Pegar o tamanho
    public int tamanho() {
+    //tambem podemos simplesmente pegar a variavel feita
       int tamanho = 0; 
       for(Celula i = primeiro; i != ultimo; i = i.prox, tamanho++);
       return tamanho;
    }
+
+   //Remover a segunda posição válida
+   //obs: esse codigo considera a existencia de um nó cabeça
+   //obs: feito com apenas uma célula. Pode ser feito com duas
+   public int removerPos2Met() throws Exception {
+    //verificação 
+    if(primeiro.prox.prox == null){
+        throw new Exception("Não há posição 2!");
+    } 
+
+    Celula tmp = primeiro.prox; //celula aponta pro 1
+    int element = tmp.prox.elemento;
+    tmp.prox = tmp.prox.prox; 
+
+    return element;
+
+   }
+
+    //Remover a segunda posição válida
+    //obs: esse codigo considera a existencia de um nó cabeça
+    public int removerPos2() throws Exception{
+        if (primeiro.prox == null || primeiro.prox.prox == null) {
+            throw new Exception("Não há posição 2!");
+        }
+
+        Celula p = primeiro.prox; //Passo 2
+        Celula q = p.prox; //Passo 3
+
+        p.prox = q.prox; //Passo 4
+        //Passo 5
+        int element = q.elemento;
+        q.prox = null;
+        q = null;
+        return elemento;
+   }
+}
+
+//criar uma classe que garante sempre que os elementos fiquem ordenados
+public class ListaSimplesEncadeadaOrdenada {
+
+    private Celula primeiro;
+    private Celula ultimo;
+
+    public ListaSimplesEncadeadaOrdenada() {
+        primeiro = new Celula(); // nó cabeça
+        ultimo = primeiro;
+    }
+
+    public void inserir(int x) {
+        Celula nova = new Celula(x);
+        Celula anterior = primeiro;
+        Celula atual = primeiro.prox;
+
+        // procurar a posição onde o novo elemento deve entrar
+        while (atual != null && atual.elemento < x) {
+            anterior = atual;
+            atual = atual.prox;
+        }
+
+        // inserir entre "anterior" e "atual"
+        nova.prox = atual;
+        anterior.prox = nova;
+
+        // se inseriu no fim, atualizar o último
+        if (nova.prox == null) {
+            ultimo = nova;
+        }
+    }
+
 }
