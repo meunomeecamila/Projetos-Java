@@ -156,96 +156,95 @@ class ListaDupla {
       return tamanho;
    }
 
-   //QUICKSORT =================================
-   //falta arrumar a esquerda e a direita
-   public static void Quicksort() {
-        Celula i = primeiro.prox; 
-        int j = tamanho();
-        int pivo = PegarOPivot(); 
+//QUICKSORT =================================
 
-        while (true) {
-            if (i > j) break;             
+// Função auxiliar para pegar o pivô (valor do meio)
+public int pegarOPivo() {
+    int meio = tamanho() / 2;
+    CelulaDupla i = primeiro.prox;
+    for (int j = 0; j < meio; j++, i = i.prox);
+    return i.elemento; // devolve o valor, não a célula
+}
 
-            while (true) {         
-                if (!(encontrar(i) < pivo)) break;
-                i = i.prox;
-            }
+// Função principal do Quicksort (recursiva por índices)
+public void quicksort(int esq, int dir) {
+    int i = esq;
+    int j = dir;
+    int pivo = pegarOPivo();
 
-            while (true) {
-                if (!(encontrar(j) > pivo)) break;
-                j = j.prox;
-            }
+    while (i <= j) {
+        while (encontrar(i) < pivo) i++;
+        while (encontrar(j) > pivo) j--;
 
-            if (i <= j) {
-               int array_i = encontrar(i);
-               int array_j = encontrar(j);
-               replace(array_i, array_j);
-                i = i.prox;
-                j = j.ant;
-            }
+        if (i <= j) {
+            int temp = encontrar(i);
+            replace(i, encontrar(j));
+            replace(j, temp);
+            i++;
+            j--;
         }
+    }
 
-        if (esq < j) Quicksort(esq, j, array);  // Recursão na parte esquerda
-        if (i < dir) Quicksort(i, dir, array);  // Recursão na parte direita
-   }
+    // chamadas recursivas
+    if (esq < j) quicksort(esq, j);
+    if (i < dir) quicksort(i, dir);
+}
 
-   public int PegarOPivot(){
-      int tam = tamanho();
-      tam /= 2;
-      // Caminhar ate a posicao anterior ao meio
-      CelulaDupla i = primeiro.prox;
-      for(int j = 0; j < tam; j++, i = i.prox);
+// Função para iniciar a ordenação sem precisar passar índices
+public void quicksort() {
+    if (tamanho() > 1) {
+        quicksort(0, tamanho() - 1);
+    }
+}
 
-      //devolver o meio como pivô
-      return i.prox;
-   }
+//SHELLSORT =================================
+// Função auxiliar: encontrar valor em uma posição
+public int encontrar(int pos) {
+    if (pos < 0 || pos >= tamanho()) {
+        System.out.println("Posição inválida!");
+        return -1;
+    }
 
-   //SHELLSORT =================================
-   //Fazer uma função auxiliar de encontrar e uma de substituir
-   public int encontrar(int pos){
-      int valorpos = 0; //valor da posição que quer encontrar
-      if(pos >= 0 || pos < tamanho()){
-         CelulaDupla i = primeiro.prox;
-         for(int j = 0; j < pos; j++, i = i.prox);
-         valor = i.elemento;
-      }
+    CelulaDupla i = primeiro.prox; // pula o nó cabeça
+    for (int j = 0; j < pos; j++, i = i.prox);
+    return i.elemento;
+}
 
-      return valor;
-   }
+// Função auxiliar: substituir valor em uma posição
+public void replace(int pos, int rep) {
+    if (pos < 0 || pos >= tamanho()) {
+        System.out.println("Posição inválida!");
+        return;
+    }
 
-   public void replace(int pos, int rep){
-      if(pos >= 0 || pos < tamanho()){
-         int valor = 0;
-         CelulaDupla i = primeiro.prox;
-         for(int j = 0; j < pos; j++, i = i.prox);
-         i.elemento = rep; //repoe o elemento
-      }
-   }
+    CelulaDupla i = primeiro.prox;
+    for (int j = 0; j < pos; j++, i = i.prox);
+    i.elemento = rep;
+}
 
-   //shellsort propriamente dito
-   public void shellSort(){
-      int tam = tamanho();
-      
-      //Começa com um gap e vai diminuindo
-      for (int gap = tam / 2; gap > 0; gap /= 2) {
+// Shellsort propriamente dito
+public void shellSort() {
+    int tam = tamanho();
 
-            // Faz a ordenação por inserção, mas com o intervalo "gap"
-            for (int i = gap; i < n; i++) {
-                int temp = encontrar(i); //encontrar o "array" na posição i
-                int j = i;
+    // começa com gap e vai diminuindo pela metade
+    for (int gap = tam / 2; gap > 0; gap /= 2) {
 
-                // Move os elementos que estão "gap" posições atrás
-                while (j >= gap && encontrar(j - gap) > temp) {
-                  replace(j,j-gap);
-                  j -= gap;
-                }
+        // percorre os elementos a partir do gap
+        for (int i = gap; i < tam; i++) {
+            int temp = encontrar(i);
+            int j = i;
 
-                replace(j,temp);
+            // move elementos gap posições atrás, se maiores que temp
+            while (j >= gap && encontrar(j - gap) > temp) {
+                replace(j, encontrar(j - gap));
+                j -= gap;
             }
-      }
 
-   }
-
+            // insere o elemento temporário na posição correta
+            replace(j, temp);
+        }
+    }
+}
 
 
 

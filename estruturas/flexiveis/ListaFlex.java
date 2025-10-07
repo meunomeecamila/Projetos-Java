@@ -219,4 +219,68 @@ public class ListaSimplesEncadeadaOrdenada {
         }
     }
 
+    //Atividades pedidas -> Implementação dos métodos de ordenação
+    public void shellsort() {
+       int n = tamanho();
+       int[] array = new int[n];
+
+       //copiar lista para vetor
+       int k = 0;
+       for(Celula i = primeiro.prox; i != null; i = i.prox){
+           array[k++] = i.elemento;
+       }
+
+       //algoritmo shellsort
+       for (int gap = n/2; gap > 0; gap /= 2) {
+           for (int i = gap; i < n; i++) {
+               int temp = array[i];
+               int j;
+               for (j = i; j >= gap && array[j - gap] > temp; j -= gap) {
+                   array[j] = array[j - gap];
+               }
+               array[j] = temp;
+           }
+       }
+
+       //regravar na lista
+       Celula atual = primeiro.prox;
+       for (int i = 0; i < n; i++, atual = atual.prox) {
+           atual.elemento = array[i];
+       }
+   }
+
+   //Quicksort simples
+   public void quicksort() {
+       int n = tamanho();
+       int[] array = new int[n];
+       int k = 0;
+       for(Celula i = primeiro.prox; i != null; i = i.prox){
+           array[k++] = i.elemento;
+       }
+
+       quicksortRec(array, 0, n - 1);
+
+       Celula atual = primeiro.prox;
+       for (int i = 0; i < n; i++, atual = atual.prox) {
+           atual.elemento = array[i];
+       }
+   }
+
+   private void quicksortRec(int[] array, int esq, int dir) {
+       int i = esq, j = dir;
+       int pivo = array[(esq + dir) / 2];
+       while (i <= j) {
+           while (array[i] < pivo) i++;
+           while (array[j] > pivo) j--;
+           if (i <= j) {
+               int tmp = array[i];
+               array[i] = array[j];
+               array[j] = tmp;
+               i++; j--;
+           }
+       }
+       if (esq < j) quicksortRec(array, esq, j);
+       if (i < dir) quicksortRec(array, i, dir);
+   }
+
 }
