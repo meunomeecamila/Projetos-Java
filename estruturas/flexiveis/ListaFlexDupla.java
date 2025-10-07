@@ -1,5 +1,5 @@
 // Obs: fila implementada de forma simples pra estudos, com throw exception
-// Métodos implementados até agora: inserir, remover, mostrar, tamanho
+// Métodos implementados até agora: inserir, remover, mostrar, tamanho, quicksort e shellsort
 
 class ListaDupla {
 	private CelulaDupla primeiro;
@@ -155,6 +155,97 @@ class ListaDupla {
       for(CelulaDupla i = primeiro; i != ultimo; i = i.prox, tamanho++);
       return tamanho;
    }
+
+   //QUICKSORT =================================
+   //falta arrumar a esquerda e a direita
+   public static void Quicksort() {
+        int i = Celula i, j = tamanho();
+        int pivo = PegarOPivot(); 
+
+        while (true) {
+            if (i > j) break;             
+
+            while (true) {         
+                if (!(encontrar[i] < pivo)) break;
+                i++;
+            }
+
+            while (true) {
+                if (!(encontrar[j] > pivo)) break;
+                j--;
+            }
+
+            if (i <= j) {
+               int array_i = encontrar(i);
+               int array_j = encontrar(j);
+               replace(array_i, array_j);
+                i++;
+                j--;
+            }
+        }
+
+        if (esq < j) Quicksort(esq, j, array);  // Recursão na parte esquerda
+        if (i < dir) Quicksort(i, dir, array);  // Recursão na parte direita
+   }
+
+   public int PegarOPivot(){
+      int tam = tamanho();
+      tam /= 2;
+      // Caminhar ate a posicao anterior ao meio
+      CelulaDupla i = primeiro.prox;
+      for(int j = 0; j < tam; j++, i = i.prox);
+
+      //devolver o meio como pivô
+      return i.prox;
+   }
+
+   //SHELLSORT =================================
+   //Fazer uma função auxiliar de encontrar e uma de substituir
+   public int encontrar(int pos){
+      int valorpos = 0; //valor da posição que quer encontrar
+      if(pos >= 0 || pos < tamanho()){
+         CelulaDupla i = primeiro.prox;
+         for(int j = 0; j < pos; j++, i = i.prox);
+         valor = i.elemento;
+      }
+
+      return valor;
+   }
+
+   public void replace(int pos, int rep){
+      if(pos >= 0 || pos < tamanho()){
+         int valor = 0;
+         CelulaDupla i = primeiro.prox;
+         for(int j = 0; j < pos; j++, i = i.prox);
+         i.elemento = rep; //repoe o elemento
+      }
+   }
+
+   //shellsort propriamente dito
+   public void shellSort(){
+      int tam = tamanho();
+      
+      //Começa com um gap e vai diminuindo
+      for (int gap = tam / 2; gap > 0; gap /= 2) {
+
+            // Faz a ordenação por inserção, mas com o intervalo "gap"
+            for (int i = gap; i < n; i++) {
+                int temp = encontrar(i); //encontrar o "array" na posição i
+                int j = i;
+
+                // Move os elementos que estão "gap" posições atrás
+                while (j >= gap && encontrar(j - gap) > temp) {
+                  replace(j,j-gap);
+                  j -= gap;
+                }
+
+                replace(j,temp);
+            }
+      }
+
+   }
+
+
 
 
 }
