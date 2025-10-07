@@ -159,28 +159,29 @@ class ListaDupla {
    //QUICKSORT =================================
    //falta arrumar a esquerda e a direita
    public static void Quicksort() {
-        int i = Celula i, j = tamanho();
+        Celula i = primeiro.prox; 
+        int j = tamanho();
         int pivo = PegarOPivot(); 
 
         while (true) {
             if (i > j) break;             
 
             while (true) {         
-                if (!(encontrar[i] < pivo)) break;
-                i++;
+                if (!(encontrar(i) < pivo)) break;
+                i = i.prox;
             }
 
             while (true) {
-                if (!(encontrar[j] > pivo)) break;
-                j--;
+                if (!(encontrar(j) > pivo)) break;
+                j = j.prox;
             }
 
             if (i <= j) {
                int array_i = encontrar(i);
                int array_j = encontrar(j);
                replace(array_i, array_j);
-                i++;
-                j--;
+                i = i.prox;
+                j = j.ant;
             }
         }
 
