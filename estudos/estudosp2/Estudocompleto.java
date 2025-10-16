@@ -27,7 +27,7 @@
 - Buscas parciais
 */
 
-//* Começo das matérias 
+//* Algoritmos de ordenação ========================
 // ! Selection sort 
 /* Complexidade no melhor caso: n²
    Complexidade no pior caso: n²
@@ -249,6 +249,54 @@ public void Counting(int[] vetor, int n){
         while(contagem[i]>0){
             vetor[index++] = i;
             contagem[i]--;
+        }
+    }
+}
+
+//* Estruturas de dados flexíveis ========================
+//? Obs: Sem contar com a matriz, as células das estruturas flexíveis seguem o
+//? mesmo modelo, que é: 
+
+//? Podemos considerar com ou sem o nó cabeça, isso deve ser explicito na pergunta 
+//? ou até no comentário do código
+
+class Celula {
+    int elemento; //número dentro da caixinha
+    Celula prox; //ponteiro da caixinha 
+
+    Celula(int x) {
+        this.elemento = x;
+        this.prox = null;
+    }
+}
+
+// ! Pilha flexível (sem nó cabeça)
+// O primeiro a entrar é o último a sair, são empilhados (LIFO)
+public class Pilhaflex{
+    public Celula topo;
+
+    //inserir -> desconsiderando o nó cabeça
+    public void inserir(int x){
+        Celula tmp = new Celula(x);
+        tmp.prox = topo;
+        topo = tmp;
+        tmp = null; 
+    }
+
+    //remover -> desconsiderando o nó cabeça
+    public int remover(){
+        //remover o topo
+        int elemento = topo.elemento;
+        Celula tmp = topo;
+        topo = topo.prox;
+        tmp.prox = null;
+        tmp = null;
+        return elemento;
+    }
+
+    public void mostrar(){
+        for(Celula i = topo; i != null. i=i.prox){
+            System.out.println(i.elemento);
         }
     }
 }
