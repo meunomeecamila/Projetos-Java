@@ -5,11 +5,11 @@
 - Selection - ok
 - Bubble - ok
 - Insertion - ok
-- Heap
+- Heap - ok
 - Quick - ok
 - Merge - ok
 - Shell - ok
-- Counting
+- Counting - ok
 */
 
 // ? (Estruturas de dados flexíveis)
@@ -226,6 +226,32 @@ public void heapify(int[] vetor, int tam, int i){
     }
 }
 
+// ! Counting
+/* Complexidade no melhor caso: (n+k) sendo k o maior num do vetor
+   Complexidade no pior caso: (n+k) sendo k o maior num do vetor
+   Utilização: Rápido para inteiros pequenos
+*/
+
+public void Counting(int[] vetor, int n){
+    int max = vetor[0];
+    for(int i=1; i<n; i++){
+        if(vetor[i] > max ) max = vetor[i];
+    }
+
+    int[] contagem = new int[max+1];
+
+    //contar quantas vezes cada um aparece
+    for(int i=0; i<n; i++) contagem[vetor[i++]];
+
+    //reconstrução
+    int index = 0;
+    for(int i=0; i<contagem.length; i++){
+        while(contagem[i]>0){
+            vetor[index++] = i;
+            contagem[i]--;
+        }
+    }
+}
 
 
 
