@@ -275,6 +275,10 @@ class Celula {
 public class Pilhaflex{
     public Celula topo;
 
+    public Pilha(){
+        topo = null;
+    }
+
     //inserir -> desconsiderando o nó cabeça
     public void inserir(int x){
         Celula tmp = new Celula(x);
@@ -296,6 +300,43 @@ public class Pilhaflex{
 
     public void mostrar(){
         for(Celula i = topo; i != null. i=i.prox){
+            System.out.println(i.elemento);
+        }
+    }
+}
+
+// ! Fila flexível (com nó cabeça)
+//O primeiro a entrar é o primeiro a sair (FIFO)
+
+public class FilaFlex{
+    public Celula primeiro;
+    public Celula ultimo; 
+
+    public Fila(){
+        primeiro = new Celula();
+        ultimo = primeiro;
+    }
+
+    //inserir -> considerando nó cabeça
+    public void inserir(int x){
+        //inserir no fim
+        ultimo.prox = new Celula(x);
+        ultimo = ultimo.prox;
+    }
+
+    //remover -> considerando nó cabeça
+    public int remover(){
+        //remover no inicio
+        Celula tmp = primeiro.prox;
+        int elemento = tmp.elemento;
+        primeiro = primeiro.prox;
+        tmp.prox = null;
+        tmp = null;
+        return elemento;
+    }
+
+    public void mostrar(){
+        for(Celula i = primeiro; i!=null; i=i.prox){
             System.out.println(i.elemento);
         }
     }
