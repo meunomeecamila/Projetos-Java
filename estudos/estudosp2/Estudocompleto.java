@@ -145,7 +145,7 @@ public void Shellsort(){
    Utilização: Sempre a mesma complexidade, ordenações externas
 */
 
-public static MergeSort(int[]vetor, int esq, int dir){
+public void MergeSort(int[]vetor, int esq, int dir){
     if(esq < dir){
         int meio = (esq+dir)/2;
         //ordenar as duas metades
@@ -157,7 +157,7 @@ public static MergeSort(int[]vetor, int esq, int dir){
 }
 
 //função de intercalar
-public static Merge(int []vetor, int esq, int meio, int dir){
+public void Merge(int []vetor, int esq, int meio, int dir){
     int n1 = meio - esq + 1;
     int n2 = dir - meio;
 
@@ -178,6 +178,52 @@ public static Merge(int []vetor, int esq, int meio, int dir){
     while(i<n1) vetor[k++] = esquerda[i++];
     while(j<n2) vetor[k++] = direita[j++];
 
+}
+
+// ! Heap
+/* Complexidade no melhor caso: n x log n
+   Complexidade no pior caso: n x log n
+   Utilização: Sempre a mesma complexidade, precisa de pouca memória 
+*/
+
+public void Heap(){
+    int[] vetor = {3, 5, 1, 0, 9, 8, 10};
+    int n = vetor.length;
+
+    //transformar o vetor em um heap 
+    for(int i = (n/2 - 1); i>=0; i--) heapify(vetor,n,i);
+
+    //extrair item por item do heap
+    for(int i=n-1; i>0; i--){
+
+        int tmp = vetor[0];
+        vetor[0] = vetor[i];
+        vetor[i] = tmp;
+
+        heapify(vetor,i,0);
+    }
+}
+
+public void heapify(int[] vetor, int tam, int i){
+    int maior = i;
+    int esquerda = 2*i + 1; //filho 1
+    int direita = 2*i + 2; //filho 2
+
+    if(esquerda < tam && vetor[esquerda] > vetor[maior]){
+        maior = esquerda;
+    }
+
+    if(direita > tam && vetor[direita] < vetor[maior]){
+        maior = direita;
+    }
+
+    if(maior != i){
+        int tmp = vetor[i];
+        vetor[i] = vetor[maior];
+        vetor[maior] = tmp;
+
+        heapify(vetor,tam,maior);
+    }
 }
 
 
