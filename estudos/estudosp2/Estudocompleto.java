@@ -342,6 +342,51 @@ public class FilaFlex{
     }
 }
 
+// ! Lista flexivel simples (com nó cabeça)
+//Pode-se inserir e remover de qualquer lugar
+
+public class ListaFlex{
+    public Celula primeiro;
+    public Celula ultimo;
+
+    public Lista(){
+        primeiro = new Celula();
+        ultimo = primeiro;
+    }
+
+    //inserir no início
+    public void inserir_inicio(int x){
+        Celula tmp = new Celula(x);
+        tmp.prox = primeiro.prox;
+        primeiro.prox = tmp;
+        tmp = null;
+    }
+
+    //inserir no fim
+    public void inserir_fim(int x){
+        ultimo.prox = new Celula(x);
+        ultimo = ultimo.prox;
+    }
+
+    //inserir no meio
+    public void inserir_meio(int x, int pos){
+        int tam = getTam();
+        if(pos > tam) return;
+        else if(pos < 0) return; 
+        else if(pos == 0) inserir_inicio(x);
+        else if(pos == tam) inserir_fim(x);
+        else {
+            //andar com o ponteiro até antes de onde insere
+            Celula i;
+            for(int j=0, i = primeiro; j<pos; i=i.prox,j++); 
+            Celula tmp = new Celula(x);
+            tmp = i.prox;
+            i.prox = tmp;
+            tmp = i = null;
+        }
+    }
+}
+
 
 
 
@@ -366,4 +411,11 @@ public static void swap(int i, int j, int[] array) {
     int temp = array[i];
     array[i] = array[j];
     array[j] = temp;
+}
+
+//TODO - PEGAR O TAMANHO
+public static int getTam(){ //lista
+    int tam = 0;
+    for(Celula i = primeiro; i != null; i = i.prox) tam++;
+    return tam;
 }
