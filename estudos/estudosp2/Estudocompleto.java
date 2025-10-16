@@ -7,7 +7,7 @@
 - Insertion - ok
 - Heap
 - Quick - ok
-- Merge 
+- Merge - ok
 - Shell - ok
 - Counting
 */
@@ -137,6 +137,47 @@ public void Shellsort(){
 
         }
     }
+}
+
+// ! Mergesort
+/* Complexidade no melhor caso: n x log n
+   Complexidade no pior caso: n x log n
+   Utilização: Sempre a mesma complexidade, ordenações externas
+*/
+
+public static MergeSort(int[]vetor, int esq, int dir){
+    if(esq < dir){
+        int meio = (esq+dir)/2;
+        //ordenar as duas metades
+        mergeSort(vetor,esq,meio);
+        mergeSort(vetor,meio+1,dir);
+        //intercalar
+        merge(vetor,esq,meio,dir);
+    }
+}
+
+//função de intercalar
+public static Merge(int []vetor, int esq, int meio, int dir){
+    int n1 = meio - esq + 1;
+    int n2 = dir - meio;
+
+    int[] esquerda = new int[n1];
+    int[] direita = new int[n2];
+
+    for(int i=0; i<n1; i++) esquerda[i] = vetor[esq+i];
+    for(int i=0; i<n2; i++) direita[i] = vetor[meio + 1 + i];
+
+    int i = 0, j = 0, k = esq;
+
+    while(i<n1 && j<n2){
+        if(esquerda[i] <= direita[j]) vetor[k++] = esquerda[i++];
+        else vetor[k++] = direita[j++];
+    }
+
+    //se sobrou algo, copia o restante
+    while(i<n1) vetor[k++] = esquerda[i++];
+    while(j<n2) vetor[k++] = direita[j++];
+
 }
 
 
