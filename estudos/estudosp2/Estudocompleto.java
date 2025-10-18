@@ -16,7 +16,7 @@
 /*
 - Pilha flex - ok
 - Fila flex - ok
-- lista simples flex
+- lista simples flex - ok
 - Lista dupla flex 
 - Matriz flex 
 */
@@ -444,6 +444,38 @@ public class ListaFlex{
         for(Celula i = primeiro; i!=null; i=i.prox){
             System.out.println(i.elemento);
         }
+    }
+}
+
+// ! Lista flexivel dupla (com nó cabeça)
+//Pode-se inserir e remover de qualquer lugar
+//obs: a parte boa da lista dupla é que podemos andar pros dois lados
+
+//para isso, teríamos que usar a celula dupla
+class CelulaDupla {
+    int elemento; //número dentro da caixinha
+    CelulaDupla prox; //ponteiro da caixinha 
+    CelulaDupla ant;
+
+    CelulaDupla(int x) {
+        this.elemento = x;
+        this.prox = null;
+        this.ant = null;
+    }
+}
+
+public class ListaFlexDupla {
+    public CelulaDupla primeiro;
+    public CelulaDupla ultimo;
+
+    public ListaFlexDupla(){
+        primeiro = new CelulaDupla();
+        ultimo = primeiro;
+    }
+
+    public void inserir_inicio(int x){
+        //considerando a existencia de um no cabeca
+        
     }
 }
 
