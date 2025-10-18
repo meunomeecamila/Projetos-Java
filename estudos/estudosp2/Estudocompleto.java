@@ -556,6 +556,10 @@ public class ListaFlexDupla {
     }
 }
 
+// ! Matriz flexível
+//Conta com um ponteiro de início que aponta para a célula (0,0)
+//tem ant, prox, sub e inf
+
 
 
 
