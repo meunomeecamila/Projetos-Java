@@ -424,7 +424,7 @@ public class ListaFlex{
         if(pos > tam) return;
         else if(pos < 0) return; 
         else if(pos == 0) remover_inicio();
-        else if(pos == tam) remover_fim();
+        else if(pos == tam-1) remover_fim();
 
         else {
             int j; Celula i;
@@ -508,6 +508,50 @@ public class ListaFlexDupla {
             tmp.ant = i;
             i.prox = tmp;
             tmp.prox.ant = tmp;
+        }
+    }
+
+    //remover no inicio
+    public int remover_inicio(){
+        //considerando nó cabeça
+        int elemento = primeiro.prox.elemento;
+        Celula i = primeiro.prox;
+        primeiro.prox = i.prox;
+        // se ainda houver alguém depois, ajusta o ant
+        if (i.prox != null) {
+            i.prox.ant = primeiro;
+        }
+        i.ant = i.prox = null;
+        i = null;
+        return elemento;
+    }
+
+    public int remover_fim(){
+        //já que em java temos coleta de lixo, podemos fazer assim
+        //obs: esse código considera a existência de um nó cabeça e de pelo menos 1 elemento
+        int elemento = ultimo.elemento;
+        ultimo = ultimo.ant;
+        ultimo.prox = null;
+        return elemento;
+    }
+
+    public int remover_meio(int pos){
+        int tam = getTam();
+        if(pos < 0 || pos > tam) return -1;
+        else if(pos == 0) remover_inicio();
+        else if(pos == tam-1) remover_fim();
+        else {
+            int j; Celula i;
+            for(j=0, i=primeiro; j<pos; j++, i=i.prox); //só vai andar
+            //chegou em uma posicao antes da que queremos remover
+            int elemento = i.prox.elemento;
+            Celula k = i.prox; //caixa a ser removida
+            i.prox = k.prox;
+            k.prox.ant = i;
+            k.ant = null;
+            k.prox = null;
+            k = null;
+            return elemento; 
         }
     }
 }
