@@ -438,6 +438,13 @@ public class ListaFlex{
             return elemento;
         }
     }
+
+    //função de mostrar
+    public void mostrar(){
+        for(Celula i = primeiro; i!=null; i=i.prox){
+            System.out.println(i.elemento);
+        }
+    }
 }
 
 
