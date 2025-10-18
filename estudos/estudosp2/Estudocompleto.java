@@ -423,8 +423,8 @@ public class ListaFlex{
         int tam = getTam();
         if(pos > tam) return;
         else if(pos < 0) return; 
-        else if(pos == 0) remover_inicio(x);
-        else if(pos == tam) remover_fim(x);
+        else if(pos == 0) remover_inicio();
+        else if(pos == tam) remover_fim();
 
         else {
             int j; Celula i;
@@ -475,7 +475,40 @@ public class ListaFlexDupla {
 
     public void inserir_inicio(int x){
         //considerando a existencia de um no cabeca
-        
+        CelulaDupla tmp = new CelulaDupla(x);
+        tmp.prox = primeiro.prox;
+        tmp.ant = primeiro;
+
+        //agora que conectamos na lista, temos que colocar o resto
+        primeiro.prox.ant = tmp;
+        primeiro.prox = tmp;
+
+        tmp = null;
+    }
+
+    public void inserir_fim(int x){
+        CelulaDupla tmp = new CelulaDupla(x);
+        ultimo.prox = tmp;
+        tmp.ant = ultimo;
+        tmp = null;
+        ultimo = ultimo.prox; //atualiza o ponteiro
+    }
+
+    public void inserir_meio(int pos, int x){
+        int tam = getTam();
+        if(pos > tam || pos < 0) return;
+        else if(pos == 0) inserir_inicio(x);
+        else if(pos == tam) inserir_fim(x);
+        else {
+            int j; Celula i;
+            for(j=0, i=primeiro; j<pos; j++,i=i.prox);
+            //para antes da posição que tem que inserir 
+            CelulaDupla tmp = new CelulaDupla(x);
+            tmp.prox = i.prox;
+            tmp.ant = i;
+            i.prox = tmp;
+            tmp.prox.ant = tmp;
+        }
     }
 }
 
