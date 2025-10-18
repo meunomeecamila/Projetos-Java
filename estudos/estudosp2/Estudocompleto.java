@@ -14,8 +14,8 @@
 
 // ? (Estruturas de dados flexíveis)
 /*
-- Pilha flex
-- Fila flex
+- Pilha flex - ok
+- Fila flex - ok
 - lista simples flex
 - Lista dupla flex 
 - Matriz flex 
@@ -383,6 +383,59 @@ public class ListaFlex{
             tmp = i.prox;
             i.prox = tmp;
             tmp = i = null;
+        }
+    }
+
+    //remover no inicio
+    public int remover_inicio(){
+        //considerando a existencia de um nó cabeça
+        Celula tmp = primeiro.prox;
+        int elemento = tmp.elemento;
+        primeiro.prox = tmp.prox;
+        tmp.prox = null;
+        tmp = null;
+        return elemento;
+    }
+
+    //remover no fim
+    public int remover_fim(){
+        //considerando a existencia de um nó cabeça
+        int elemento = ultimo.elemento; 
+        Celula i;
+        //andar com o ponteiro
+        for(i = primeiro; i.prox != ultimo; i=i.prox);
+
+        //se há apenas um elemento, sobrará apenas o nó cabeça
+        if(primeiro.prox == ultimo){
+            ultimo = primeiro;
+            primeiro.prox = null;
+        }
+        else {
+            ultimo = i;
+            ultimo.prox = null;
+        }
+        return elemento;
+    }
+
+    //remover no meio
+    public int remover_meio(int pos){
+        //aqui podemos fazer verificações
+        int tam = getTam();
+        if(pos > tam) return;
+        else if(pos < 0) return; 
+        else if(pos == 0) remover_inicio(x);
+        else if(pos == tam) remover_fim(x);
+
+        else {
+            int j; Celula i;
+            //anda com o ponteiro
+            for(j=0, i = primeiro; j < pos; j++, i=i.prox);
+            int elemento = i.prox.elemento;
+            Celula k = i.prox;
+            i.prox = k.prox;
+            k.prox = null;
+            i = k = null;
+            return elemento;
         }
     }
 }
