@@ -17,7 +17,7 @@
 - Pilha flex - ok
 - Fila flex - ok
 - lista simples flex - ok
-- Lista dupla flex 
+- Lista dupla flex - ok
 - Matriz flex 
 */
 
