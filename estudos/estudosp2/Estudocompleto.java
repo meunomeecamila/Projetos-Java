@@ -560,6 +560,23 @@ public class ListaFlexDupla {
 //Conta com um ponteiro de início que aponta para a célula (0,0)
 //tem ant, prox, sub e inf
 
+//Classe e construtores
+class CelulaMatriz {
+    int elemento;
+    CelulaMatriz ant, prox; //ponteiros laterais ou horizontais
+    CelulaMatriz sup, inf; //ponteiros verticais
+
+    CelulaMatriz(){
+        this(0);
+    }
+
+    CelulaMatriz(int x){
+        this.elemento = x;
+        this.sup = this.ant = this.prox = this.inf = null;
+    }
+    
+}
+
 
 
 
