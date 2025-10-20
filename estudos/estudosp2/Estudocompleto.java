@@ -1,4 +1,8 @@
 // * Esse documento conterá as matérias para a prova 2 de AED. 
+
+// TODO - Caso deseje utilizar algum dos códigos, troque o nome do arquivo Estudocompleto.java para o desejado
+// TODO - A segunda opção é copiar e colar para outro arquivo
+
 // ! Matérias:
 // ? (Códigos de ordenação) 
 /*
@@ -241,7 +245,7 @@ public void Counting(int[] vetor, int n){
     int[] contagem = new int[max+1];
 
     //contar quantas vezes cada um aparece
-    for(int i=0; i<n; i++) contagem[vetor[i++]];
+    for(int i=0; i<n; i++) contagem[vetor[i]]++;
 
     //reconstrução
     int index = 0;
@@ -272,10 +276,10 @@ class Celula {
 
 // ! Pilha flexível (sem nó cabeça)
 // O primeiro a entrar é o último a sair, são empilhados (LIFO)
-public class Pilhaflex{
+public class Pilhaflex{ //mudar o nome do arquivo se for executar 
     public Celula topo;
 
-    public Pilha(){
+    public Pilhaflex(){
         topo = null;
     }
 
@@ -299,7 +303,7 @@ public class Pilhaflex{
     }
 
     public void mostrar(){
-        for(Celula i = topo; i != null. i=i.prox){
+        for(Celula i = topo; i != null; i=i.prox){
             System.out.println(i.elemento);
         }
     }
@@ -308,12 +312,12 @@ public class Pilhaflex{
 // ! Fila flexível (com nó cabeça)
 //O primeiro a entrar é o primeiro a sair (FIFO)
 
-public class FilaFlex{
+public class FilaFlex{ //mudar o nome do arquivo se for executar 
     public Celula primeiro;
     public Celula ultimo; 
 
-    public Fila(){
-        primeiro = new Celula();
+    public FilaFlex(){
+        primeiro = new Celula(0);
         ultimo = primeiro;
     }
 
@@ -345,12 +349,12 @@ public class FilaFlex{
 // ! Lista flexivel simples (com nó cabeça)
 //Pode-se inserir e remover de qualquer lugar
 
-public class ListaFlex{
+public class ListaFlex{ //mudar o nome do arquivo se for usar
     public Celula primeiro;
     public Celula ultimo;
 
-    public Lista(){
-        primeiro = new Celula();
+    public ListaFlex(){
+        primeiro = new Celula(0);
         ultimo = primeiro;
     }
 
@@ -377,10 +381,10 @@ public class ListaFlex{
         else if(pos == tam) inserir_fim(x);
         else {
             //andar com o ponteiro até antes de onde insere
-            Celula i;
-            for(int j=0, i = primeiro; j<pos; i=i.prox,j++); 
+            Celula i = primeiro;
+            for(int j=0; j<pos; i=i.prox,j++); 
             Celula tmp = new Celula(x);
-            tmp = i.prox;
+            tmp.prox = i.prox;
             i.prox = tmp;
             tmp = i = null;
         }
@@ -421,8 +425,8 @@ public class ListaFlex{
     public int remover_meio(int pos){
         //aqui podemos fazer verificações
         int tam = getTam();
-        if(pos > tam) return;
-        else if(pos < 0) return; 
+        if(pos > tam) return 0;
+        else if(pos < 0) return 0; 
         else if(pos == 0) remover_inicio();
         else if(pos == tam-1) remover_fim();
 
@@ -445,6 +449,12 @@ public class ListaFlex{
             System.out.println(i.elemento);
         }
     }
+
+    public int getTam(){
+        int tam = 0;
+        for(Celula i=primeiro; i!=null; i=i.prox) tam++;
+        return tam;
+    }
 }
 
 // ! Lista flexivel dupla (com nó cabeça)
@@ -464,12 +474,12 @@ class CelulaDupla {
     }
 }
 
-public class ListaFlexDupla {
+public class ListaFlexDupla { //trocar o nome do arquivo se for usar
     public CelulaDupla primeiro;
     public CelulaDupla ultimo;
 
     public ListaFlexDupla(){
-        primeiro = new CelulaDupla();
+        primeiro = new CelulaDupla(0);
         ultimo = primeiro;
     }
 
@@ -500,8 +510,8 @@ public class ListaFlexDupla {
         else if(pos == 0) inserir_inicio(x);
         else if(pos == tam) inserir_fim(x);
         else {
-            int j; Celula i;
-            for(j=0, i=primeiro; j<pos; j++,i=i.prox);
+            CelulaDupla i = primeiro;
+            for(int j=0; j<pos; j++,i=i.prox);
             //para antes da posição que tem que inserir 
             CelulaDupla tmp = new CelulaDupla(x);
             tmp.prox = i.prox;
@@ -515,7 +525,7 @@ public class ListaFlexDupla {
     public int remover_inicio(){
         //considerando nó cabeça
         int elemento = primeiro.prox.elemento;
-        Celula i = primeiro.prox;
+        CelulaDupla i = primeiro.prox;
         primeiro.prox = i.prox;
         // se ainda houver alguém depois, ajusta o ant
         if (i.prox != null) {
@@ -541,11 +551,11 @@ public class ListaFlexDupla {
         else if(pos == 0) remover_inicio();
         else if(pos == tam-1) remover_fim();
         else {
-            int j; Celula i;
-            for(j=0, i=primeiro; j<pos; j++, i=i.prox); //só vai andar
+            CelulaDupla i = primeiro;
+            for(int j=0; j<pos; j++, i=i.prox); //só vai andar
             //chegou em uma posicao antes da que queremos remover
             int elemento = i.prox.elemento;
-            Celula k = i.prox; //caixa a ser removida
+            CelulaDupla k = i.prox; //caixa a ser removida
             i.prox = k.prox;
             k.prox.ant = i;
             k.ant = null;
@@ -574,7 +584,15 @@ class CelulaMatriz {
         this.elemento = x;
         this.sup = this.ant = this.prox = this.inf = null;
     }
-    
+}
+
+class Matriz {
+    CelulaMatriz inicio; 
+    int linha; int coluna; 
+
+    //Construtor
+
+
 }
 
 
@@ -604,7 +622,7 @@ public static void swap(int i, int j, int[] array) {
 }
 
 //TODO - PEGAR O TAMANHO
-public static int getTam(){ //lista
+public static int getTam(Celula primeiro, Celula prox){ //lista
     int tam = 0;
     for(Celula i = primeiro; i != null; i = i.prox) tam++;
     return tam;
