@@ -571,7 +571,7 @@ public class ListaFlexDupla { //trocar o nome do arquivo se for usar
 //tem ant, prox, sub e inf
 
 //Classe e construtores
-class CelulaMatriz {
+class CelulaMatriz { 
     int elemento;
     CelulaMatriz ant, prox; //ponteiros laterais ou horizontais
     CelulaMatriz sup, inf; //ponteiros verticais
@@ -586,12 +586,53 @@ class CelulaMatriz {
     }
 }
 
-class Matriz {
+class Matriz { //trocar o nome do arquivo caso for usar
     CelulaMatriz inicio; 
     int linha; int coluna; 
 
     //Construtor
+    Matriz(int linha, int coluna){
+        this.linha = linha;
+        this.coluna = coluna;
+        construirMatriz();
+    }
 
+    private void construirMatriz(){
+        CelulaMatriz i,j,k,t; 
+        inicio = new CelulaMatriz(); //ponteiro que aponta pra primeira celula
+
+        //Criação da primeira linha
+        i = inicio;
+        for(int var=1; var < coluna; var++){
+            i.prox = new CelulaMatriz();
+            i.prox.ant = i;
+            i = i.prox;
+        }
+
+        //Cria as demais linhas
+        t = inicio;
+        for(int var=1; var < linha; var++){
+            i = new CelulaMatriz();
+            t.inf = i;
+            t.sup = t;
+
+            //liga horizontalmente
+            j = i;
+            k = t.prox;
+
+            for(int var2=1; var2<coluna; var2++){
+                j.prox = new CelulaMatriz();
+                j.prox.ant = j;
+                j = j.prox;
+
+                j.sup = k;
+                k.inf = j;
+                k = k.prox;
+            }
+
+            t = t.inf;
+        }
+    }
 
 }
 
