@@ -27,7 +27,7 @@
 
 // ? (Extras)
 /*
-- Coleta de lixo 
+- Coleta de lixo - ok
 - Buscas parciais
 */
 
