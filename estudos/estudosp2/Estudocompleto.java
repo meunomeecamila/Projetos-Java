@@ -22,7 +22,7 @@
 - Fila flex - ok
 - lista simples flex - ok
 - Lista dupla flex - ok
-- Matriz flex 
+- Matriz flex - ok
 */
 
 // ? (Extras)
@@ -719,9 +719,43 @@ class Matriz { //trocar o nome do arquivo caso for usar
         //quando acabar, imprimir o elemento
         System.out.println(prim.elemento);
     }
+}
 
+// ! Observação importante
+/* É possível que os professores misturem duas ou mais matérias e peçam para aplicar
+os algoritmos de ordenação em estruturas de dados flexíveis. Para isso, seria necessário
+mudar muitas partes do código, e logo seria trabalhoso e diferente pra cada um. 
+Uma opção que vou adotar nestas próximas linhas é usar de duas funções auxiliares que
+simulem um vetor. Assim, essas funções deixarão os códigos mais modularizados e impedirão
+mudanças bruscas em relação aos originais
+*/
 
+//Função auxiliar 01: busca 
+//recebe uma posição e retorna o valor daquela posição
+//vou usar como exemplo a lista
+public int busca(int pos){
+    if(pos < 0 /*|| pos > tam*/) return -1;
 
+    //se chegou até aqui, posição válida
+    Celula i = primeiro; int j;
+    for(j=0; j<pos; j++) i = i.prox;
+
+    //depois do for, o i está a uma casa antes 
+    return i.prox.elemento;
+}
+
+//Função auxiliar 02: replace
+//recebe uma posição e o elemento que queremos colocar
+//troca o elemento da posição pelo pedido
+//é um tipo de swap
+public void replace(int pos, int element){
+    if(pos < 0 /*|| pos > tam*/) return;
+
+    //se chegou até aqui, posição válida
+    Celula i = primeiro; int j;
+    for(j=0; j<pos; j++) i = i.prox;
+
+    i.elemento = element;
 }
 
 
