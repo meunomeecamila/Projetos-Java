@@ -644,7 +644,54 @@ class Matriz { //trocar o nome do arquivo caso for usar
     }
 
     public int getElemento(int linha, int coluna){
-        //continuar aqui
+        //retornar o elemento em alguma posição dada linha e coluna
+        int l,c;
+        CelulaMatriz i = inicio;
+        for(l=0;l<linha;l++) i=i.inf; //anda com as linhas pra baixo
+        for(c=0;c<coluna;c++) i=i.prox; //anda com as colunas pro lado
+        int ele = i.elemento;
+        return ele; 
+    }
+
+    public void printMainDiag(int linha, int coluna){
+        if(linha != coluna) return; //tem que ser quadrada
+        CelulaMatriz i = inicio;
+        for(int j=0; j<linha; j++){
+            System.out.println(i.elemento);
+            if(i.prox == null || i.prox.inf == null) break;
+            i = i.prox.inf;
+        }
+    }
+
+    public void printSecondDiag(int linha, int coluna){
+        if(linha != coluna) return; //tem que ser quadrada
+
+        //andar até o final das colunas (topo direito)
+        CelulaMatriz i = inicio;
+        while(i.prox != null) i=i.prox;
+
+        //agora descer e ir a esquerda
+        for(int j=0; j<linha; j++){
+            System.out.println(i.elemento);
+            if(i.ant == null || i.ant.inf == null) break;
+            i=i.ant.inf;
+        }
+    }
+
+    public void mostrar(){
+        CelulaMatriz linhaA = inicio; //linha Atual
+
+        while(linhaA != null){
+            CelulaMatriz colunaA = linhaA; //coluna Atual
+            
+            while(colunaA != null){
+                System.out.print(colunaA.elemento + " ");
+                colunaA = colunaA.prox;
+            }
+
+            System.out.println(); //\n
+            linhaA = linhaA.inf;
+        }
     }
 
 
