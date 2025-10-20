@@ -758,6 +758,19 @@ public void replace(int pos, int element){
     i.elemento = element;
 }
 
+//* Coleta de lixo ========================
+/* A coleta de lixo é um método que facilita a vida de quem mexe com Java. 
+Itens que perdem a referência, ou seja, não tem nenhum ponteiro apontado para eles, 
+são coletados pelo Garbage Collector quando é necessária a utilização de espaço. 
+*/
+
+//* Prós: não é necessário dar free, mais tranquilo para o dev
+//! Contras: não se tem controle de quando será removido pela máquina virtual Java
+
+/*Obs: é importante lembrar que linguagens como C e C++ não possuem a coleta de 
+lixo automática, e por isso é necessário dar o free antes de atribuir a nulo
+*/
+
 
 
 
