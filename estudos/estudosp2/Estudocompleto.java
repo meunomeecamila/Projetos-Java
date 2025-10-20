@@ -634,6 +634,21 @@ class Matriz { //trocar o nome do arquivo caso for usar
         }
     }
 
+    public void inserir(int linha, int coluna, int valor){
+        CelulaMatriz tmp = inicio;
+        int i,j;
+        //andar com o i e o j
+        for(i=0; i<linha; i++) tmp = tmp.inf;
+        for(j=0; j<linha; j++) tmp = tmp.prox;
+        tmp.elemento = valor;
+    }
+
+    public int getElemento(int linha, int coluna){
+        //continuar aqui
+    }
+
+
+
 }
 
 
