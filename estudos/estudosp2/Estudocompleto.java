@@ -694,6 +694,32 @@ class Matriz { //trocar o nome do arquivo caso for usar
         }
     }
 
+    /*Exercício extra - Lista em Matriz
+    Cada nó da matriz tem um ponteiro de primeiro e é o nó cabeça de uma lista. 
+    Escreva uma função que passa como parametro a linha e a coluna para acharmos 
+    o nó cabeça na matriz e a posicao que queremos imprimir da lista, 
+    considerando o nó cabeça como a posição zero.
+    */
+
+    public void listaEmMatriz(int linha, int coluna, int pos){
+        CelulaMatriz i = inicio;
+        int j,k;
+        
+        //percorrer as linhas
+        for(j=0; j<linha; j++) i=i.inf;
+        //percorrer as colunas
+        for(k=0; k<coluna; k++) i=i.prox;
+
+        //Agora que chegamos na posição do nó cabeça, procurar o elemento
+        int c;
+        Celula prim = i.primeiro; //ponteiro primeiro do nó cabeça
+        //obs: deve ser um ponteiro celula e não Célula Matriz pois percorre a lista!
+        for(c=0; c<pos; c++) prim = prim.prox;
+
+        //quando acabar, imprimir o elemento
+        System.out.println(prim.elemento);
+    }
+
 
 
 }
