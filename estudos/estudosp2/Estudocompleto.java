@@ -832,6 +832,50 @@ os elementos a sua esquerda sejam menores que cada nó e todos os elementos a su
 sejam maiores.
 */
 
+//Classe nó
+public class No {
+    int elemento;
+    No esq;
+    No dir;
+
+    //construtor
+    public No(int x){
+        this.elemento = x;
+        this.esq = null;
+        this.dir = null;
+    }
+}
+
+public class Arvore {
+    //árvore de pesquisa binária
+    public No raiz;
+
+    public Arvore(){
+        this.raiz = null;
+    }
+
+    //método de inserir
+    //direita -> maiores
+    //esquerda -> menores
+    public No inserir(int x, No i){
+        if(i == null){
+            i = new No(x);
+        }
+        else if(x < i.elemento){
+            //esquerda
+            i.esq = inserir(x,i.esq);
+        }
+        else if(x > i.elemento){
+            //direita
+            i.dir = inserir(x,i.dir);
+        }
+        else if(x == i.elemento){
+            System.out.println("erro");
+        }
+        return i;
+    }
+}
+
 
 
 
