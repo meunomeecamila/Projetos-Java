@@ -23,12 +23,13 @@
 - lista simples flex - ok
 - Lista dupla flex - ok
 - Matriz flex - ok
+- Árvore
 */
 
 // ? (Extras)
 /*
 - Coleta de lixo - ok
-- Buscas parciais
+- Ordenações parciais - ok
 */
 
 //* Algoritmos de ordenação ========================
@@ -770,6 +771,57 @@ são coletados pelo Garbage Collector quando é necessária a utilização de es
 /*Obs: é importante lembrar que linguagens como C e C++ não possuem a coleta de 
 lixo automática, e por isso é necessário dar o free antes de atribuir a nulo
 */
+
+//* Ordenações parciais ========================
+/*As ordenações parciais são formas de implementar algoritmos de ordenação para que eles
+só ordenem k elementos, ao invés de n elementos, sendo k um número de escolha, muitas
+vezes do usuário. O algoritmo que eu acho mais fácil de implementar a busca parcial
+é o Seleção, no qual mudamos apenas o FOR, como no exemplo a seguir
+*/
+
+public void selecao_parcial(){
+    int vetor{13,20,18,9,2,1,0,829,1938,10};
+    int tam = vetor.length; //nesse caso, 10
+    
+    //supondo que queremos apenas metade
+    int k = tam/2;
+
+    for(int i=0; i<k; i++){ //mudou apenas aqui
+        int menor = i;
+        for(int j= i-1; j<n; j++){
+            if(vetor[j] < menor){
+                menor = j;
+            }
+        }
+
+        swap(vetor, menor, j);
+    }
+}
+
+//um outro exemplo mas um pouco mais complicado é o do algoritmo de inserção
+//nele, o J vai depender de k ser maior ou de i ser maior
+
+public void insercao_parcial(){
+    int tam = vetor.length; //nesse caso, 10
+    
+    //supondo que queremos apenas metade
+    int k = tam/2;
+
+    for(int i=1; i<n; i++){
+        int tmp = vetor[i];
+        int j;
+        //muda aqui
+        if(i < k) = j = i-1;
+        else j = k-1;
+
+        while(j>=0 && vetor[j] > tmp){
+            vetor[j+1] = vetor[j]
+            j--;
+        }
+        //colocar tmp
+        vetor[j+1] = tmp;
+    }
+}
 
 
 
