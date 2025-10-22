@@ -823,6 +823,15 @@ public void insercao_parcial(){
     }
 }
 
+//* Árvores ========================
+/* As árvores são estruturas flexíveis normalmente implementadas de forma recursiva. 
+Elas tem uma raiz que é um ponteiro, e cada nó tem dois outros ponteiros: esq e dir. 
+No caso de AED2, iremos trabalhar majoritariamente com ÁRVORES BINÁRIAS DE PESQUISA, 
+que tem 0,1 ou 2 filhos. Além disso, para ser de pesquisa, a árvore precisa que todos 
+os elementos a sua esquerda sejam menores que cada nó e todos os elementos a sua direita,
+sejam maiores.
+*/
+
 
 
 
