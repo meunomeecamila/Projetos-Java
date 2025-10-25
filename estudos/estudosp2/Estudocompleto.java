@@ -218,7 +218,7 @@ public void heapify(int[] vetor, int tam, int i){
         maior = esquerda;
     }
 
-    if(direita > tam && vetor[direita] < vetor[maior]){
+    if(direita < tam && vetor[direita] > vetor[maior]){
         maior = direita;
     }
 
