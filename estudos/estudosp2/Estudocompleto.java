@@ -742,7 +742,7 @@ public int busca(int pos){
     for(j=0; j<pos; j++) i = i.prox;
 
     //depois do for, o i está a uma casa antes 
-    return i.prox.elemento;
+    return i.elemento;
 }
 
 //Função auxiliar 02: replace
