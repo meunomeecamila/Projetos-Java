@@ -94,6 +94,13 @@ public class Arvorepreta{
         else if((arvoreV.stringVerme(i.raiz)) == true) return true;
         else return stringPreto(i.esq) || stringPreto(i.dir);
     }
+
+    //função que retorna true se tivermos uma string de tamanho 10 que começa com o char c
+    public boolean charPreto(Nopreto i, char c){
+        if(i == null) return false;
+        else if((arvoreV.charVerme(i.raiz, c)) == true) return true;
+        else return charPreto(i.esq,c) || charPreto(i.dir,c);
+    }
 }
 
 public class Arvoreverme {
@@ -170,6 +177,13 @@ public class Arvoreverme {
         if(i == null) return false;
         else if(i.nome.length() == 10) return true;
         else return stringVerme(i.esq) || stringVerme(i.dir);
+    }
+
+    //função que retorna true se tivermos uma string de tamanho 10 que começa com o char c
+    public boolean charVerme(Noverme i, char c){
+        if(i == null) return false;
+        else if(i.nome.length() == 10 && i.nome.charAt(0) == c) return true;
+        else return charVerme(i.esq,c) || charVerme(i.dir,c);
     }
     
 }
