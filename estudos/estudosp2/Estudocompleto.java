@@ -601,7 +601,7 @@ class Matriz { //trocar o nome do arquivo caso for usar
     private void construirMatriz(){
         CelulaMatriz i,j,k,t; 
         inicio = new CelulaMatriz(); //ponteiro que aponta pra primeira celula
-
+ 
         //Criação da primeira linha
         i = inicio;
         for(int var=1; var < coluna; var++){
