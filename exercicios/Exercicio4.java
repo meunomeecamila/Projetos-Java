@@ -83,6 +83,65 @@ public class Matriz {
             cima = cima.inf;
         }
     }
+
+    public boolean pesquisar(int elemento) {
+        for (CelulaMat i = inicio; i != null; i = i.inf) {          // percorre linhas
+            for (CelulaMat j = i; j != null; j = j.prox) {          // percorre colunas
+                for (Celula k = j.lista.primeiro.prox; k != null; k = k.prox) { // percorre lista da célula
+                    if (k.elemento == elemento) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean pesquisar(int i, int j, int elemento) {
+        CelulaMat cel = getCelula(i, j);
+        if (cel == null) return false;
+
+        for (Celula k = cel.lista.primeiro.prox; k != null; k = k.prox) {
+            if (k.elemento == elemento) return true;
+        }
+        return false;
+    }
+
+    public void inserir(int i, int j, int elemento) {
+        CelulaMat cel = getCelula(i, j);
+        if (cel == null) {
+            System.out.println("Posição inválida!");
+            return;
+        }
+
+        Celula nova = new Celula(elemento);
+        cel.lista.ultimo.prox = nova;
+        cel.lista.ultimo = nova;
+    }
+
+    public void mostrar() {
+        for (CelulaMat i = inicio; i != null; i = i.inf) {
+            for (CelulaMat j = i; j != null; j = j.prox) {
+                System.out.print("[");
+                for (Celula k = j.lista.primeiro.prox; k != null; k = k.prox) {
+                    System.out.print(k.elemento + " ");
+                }
+                System.out.print("] ");
+            }
+            System.out.println();
+         }
+    }
+
+    private CelulaMat getCelula(int i, int j) {
+        CelulaMat linha = inicio;
+
+        for (int x = 0; x < i && linha != null; x++) linha = linha.inf;
+        if (linha == null) return null;
+
+        CelulaMat coluna = linha;
+        for (int y = 0; y < j && coluna != null; y++) coluna = coluna.prox;
+
+        return coluna;
+    }
+
 }
 
 
