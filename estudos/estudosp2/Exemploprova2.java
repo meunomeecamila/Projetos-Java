@@ -1,3 +1,58 @@
+/*
+============================================================
+Exercício: Sorveteiros na Praia
+============================================================
+
+Em uma praia de comprimento P metros, há S sorveteiros.
+Cada sorveteiro ocupa um intervalo contínuo da praia,
+definido por dois números inteiros:
+ - o ponto de início
+ - o ponto de fim
+
+Alguns sorveteiros podem ter áreas de atuação que se
+sobrepõem. O objetivo é agrupar os intervalos que se
+interceptam e mostrar a extensão total de cada grupo.
+
+O programa deve ler os intervalos de cada sorveteiro,
+fundir aqueles que se sobrepõem e imprimir os intervalos
+resultantes após a fusão.
+
+------------------------------------------------------------
+ENTRADA:
+P               → comprimento total da praia
+S               → quantidade de sorveteiros
+<inicio1> <fim1>
+<inicio2> <fim2>
+...
+<inicioS> <fimS>
+
+------------------------------------------------------------
+SAÍDA:
+Para cada grupo de intervalos sobrepostos, imprimir
+os valores de início e fim do grupo.
+
+------------------------------------------------------------
+EXEMPLO:
+Entrada:
+10
+4
+1 3
+2 5
+6 8
+8 9
+
+Saída:
+1 5
+6 9
+
+------------------------------------------------------------
+EXPLICAÇÃO:
+- Os sorveteiros 1 e 2 se sobrepõem (1–3 e 2–5), formando o grupo 1–5.
+- Os sorveteiros 3 e 4 também se sobrepõem (6–8 e 8–9), formando o grupo 6–9.
+============================================================
+*/
+
+
 import java.util.*;
 
 public class Sorveteiro {
