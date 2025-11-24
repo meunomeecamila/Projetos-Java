@@ -47,6 +47,7 @@ public class AVL {
     //caminhar central 
     //lista todos os elementos em ordem crescente
     public void caminharcentral(No i){
+        if(i == null) return;
         caminharcentral(i.esq);
         System.out.println(i.elemento); //ou outra função
         caminharcentral(i.dir);
@@ -55,16 +56,18 @@ public class AVL {
     //caminhar pré-ordem
     //lista primeiro o nó e depois seus filhos
     public void caminharpre(No i){
+        if(i == null) return;
+        System.out.println(i.elemento); //ou outra função
         caminharpre(i.esq);
         caminharpre(i.dir);
-        System.out.println(i.elemento); //ou outra função
     }
 
     //caminhar pós-ordem
     //lista primeiro os filhos e por último o nó
     public void caminharpos(No i){
-        System.out.println(i.elemento); //ou outra função
+        if(i == null) return;
         caminharpos(i.esq);
         caminharpos(i.dir);
+        System.out.println(i.elemento); //ou outra função
     }
 }
