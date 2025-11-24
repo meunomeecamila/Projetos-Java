@@ -4,14 +4,14 @@ e matérias adjacentes de finalização da disciplina de AED2 */
 
 //* Matérias p3
 /* 
-- Árvores binárias de busca (AVL)
-- Balanceamento de árvores binárias
+- Árvores binárias de busca - ok
+- Balanceamento de árvores binárias (AVL)
 - Árvores 234
 - Árvores bicolor (alvinegras)
 - Tabela hash
  */
 
-//! Árvores binárias de busca (AVL)
+//! Árvores binárias de busca
 /* São estruturas com uma raiz e nós, onde cada nó tem 0,1 ou 2 filhos (binárias). 
 Os filhos da sua esquerda são sempre menores e os da sua direita, maiores que o nó. 
 É considerada balanceada quando a diferença de altura entre a direita e a esquerda
@@ -36,11 +36,11 @@ public class No {
     }
 }
 
-public class AVL {
+public class Arvore {
     public No raiz; 
 
     //construtor
-    public AVL(){
+    public Arvore(){
         this.raiz = null;
     }
 
@@ -90,4 +90,82 @@ public class AVL {
 
         return i;
     }
+
+    //pesquisar um elemento
+    public boolean pesquisar(No i, int elemento){
+        if(i==null){
+            //chegou no fim e nao achou
+            return false;
+        }
+
+        else if(elemento < i.elemento){
+            return pesquisar(i.esq, elemento);
+        }
+
+        else if(elemento > i.elemento){
+            return pesquisar(i.dir,elemento);
+        }
+
+        else return true;
+    }
+
+    //remover um elemento
+    public No remover(No i, int x) {
+        //procurou em toda a árvore e não encontrou
+        if (i == null) {
+            System.out.println("Não tem");
+            return null;
+        }
+
+        //caminhar
+        if (x < i.elemento) {
+            i.esq = remover(i.esq, x);
+        }
+
+        else if (x > i.elemento) {
+            i.dir = remover(i.dir, x);
+        }
+
+        else {
+            // achou o elemento
+
+            // caso 1: sem filhos
+            if (i.esq == null && i.dir == null) {
+                return null; //retorna null pra quem chamou, desconectando
+            }
+
+            // caso 2: um filho (direita)
+            if (i.esq == null) {
+                return i.dir; //retorna dir pra quem chamou, desconectando
+            }
+
+            // caso 2: um filho (esquerda)
+            if (i.dir == null) {
+                return i.esq; //retorna esq pra quem chamou, desconectando
+            }
+
+            // caso 3: dois filhos
+            // substitui pelo maior da esquerda (ou pelo menor da direita)
+            No maior = maiorNo(i.esq);
+            i.elemento = maior.elemento;
+            i.esq = remover(i.esq, maior.elemento);
+        }
+
+        return i;
+    }
+
+    //função auxiliar pra encontrar o maior nó
+    public No maiorNo(No i){
+        if(i.dir == null) return i;
+        else return maiorNo(i.dir); //sempre anda pra direita pra encontrar o maior
+    }
+
 }
+
+//! Balanceamento de árvores binárias (AVL)
+/* São estruturas com uma raiz e nós, onde cada nó tem 0,1 ou 2 filhos (binárias). 
+Os filhos da sua esquerda são sempre menores e os da sua direita, maiores que o nó. 
+É considerada balanceada quando a diferença de altura entre a direita e a esquerda
+em cada nó é no máximo 1 ou -1. 
+Sua inserção, remoção e busca vai até no máximo lg n
+*/
