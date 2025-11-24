@@ -70,4 +70,24 @@ public class AVL {
         caminharpos(i.dir);
         System.out.println(i.elemento); //ou outra função
     }
+
+    //inserir um elemento
+    public No inserir(No i, int elemento){
+        if(i == null){
+            //lugar de inserção
+            i = new No(elemento);
+        }
+
+        else if(elemento < i.elemento){
+            i.esq = inserir(i.esq, elemento);
+        }
+
+        else if(elemento > i.elemento){
+            i.dir = inserir(i.dir, elemento);
+        }
+
+        else System.out.println("Inválido!");
+
+        return i;
+    }
 }
