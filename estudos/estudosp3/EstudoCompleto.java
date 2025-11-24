@@ -227,4 +227,58 @@ public class AVL {
         if(i == null) return -1;
         else return i.altura;
     }
+
+    //! função de calcular o FB(fator de balanceamento)
+    //a árvore precisará ser balanceada quando FB for 2 (dir) ou -2 (esq)
+    public int fator(NoAVL i){
+        return altura(i.esq) - altura(i.dir);
+    }
+
+    //! função de balancear - importantíssima pra AVL
+    /*calcula o FB (fator de balanceamento) pra detectar se está 
+    desbalanceada. Escolhe a rotação e retorna o nó rotacionado */
+
+    //* Opções de rotação
+    //TODO - Rotação simples à direita
+    /* Acontece quando: árvore está toda manca pra esquerda
+    Rotação é no: avô */
+
+    //TODO - Rotação simples à esquerda
+    /* Acontece quando: árvore está toda manca pra direita
+    Rotação é no: avô*/
+
+    //TODO - Rotação dupla esq-dir
+    /* Acontece quando: árvore está manca pra esquerda e depois direita (<)
+    Rotação é no: primeira no pai, segunda no avô*/
+
+    //TODO - Rotação dupla dir-esq
+    /* Acontece quando: árvore está manca pra direita e depois esquerda (>)
+    Rotação é no: primeira no pai, segunda no avô*/
+
+    public NoAVL balancear(NoAVL i){
+        int fb = fator(i); //fator de balanceamento
+
+        //ver qual rotação será feita
+        if(fb == 2){ //rotação para a direita (simples ou dupla)
+            if(fator(i.esq) < 0){ //rotação dupla
+                i = rotacaoEsqDir(i);
+            }
+
+            else { //rotação simples
+                i = rotacaoDir(i);
+            }
+        }
+
+        else if(fb == -2){ //rotação para a esquerda (simples ou dupla)
+            if(fator(i.dir) > 0){
+                i = rotacaoDirEsq(i);
+            }
+
+            else { //rotação simples
+                i = rotacaoEsq(i);
+            }
+        }
+
+        return i; 
+    }
 }
