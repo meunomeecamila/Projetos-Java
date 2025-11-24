@@ -165,7 +165,66 @@ public class Arvore {
 //! Balanceamento de árvores binárias (AVL)
 /* São estruturas com uma raiz e nós, onde cada nó tem 0,1 ou 2 filhos (binárias). 
 Os filhos da sua esquerda são sempre menores e os da sua direita, maiores que o nó. 
-É considerada balanceada quando a diferença de altura entre a direita e a esquerda
-em cada nó é no máximo 1 ou -1. 
+Nessa árvore, rotacionamos em 4 direções para balancear caso necessário, gerando
+eficiência em termos de pesquisa, remoção e inserção
 Sua inserção, remoção e busca vai até no máximo lg n
 */
+
+//* Principais mudanças: 
+/*
+- Altura do nó (cada nó armazena sua própria altura ou fator)
+- Cálculo do FB (fator de balanceamento) ao inserir
+- Função de balancear
+- 4 rotações (SD, SE, DDE, DED)
+*/
+
+public class NoAVL {
+    public NoAVL esq;
+    public NoAVL dir;
+    public int elemento;
+    public int altura;
+
+    public NoAVL(int x){
+        this.elemento = x;
+        this.altura = 0;
+        this.esq = null;
+        this.dir = null;
+    }
+}
+
+public class AVL {
+    public NoAVL raiz;
+
+    public AVL(){
+        this.raiz = null;
+    }
+
+    //!obs: os caminhar ficam iguais, então não implementei novamente
+
+    //!função de inserir
+    //diferenças: precisa atualizar altura, calcular o fator e balancear se necessário
+    public NoAVL inserir(NoAVL i, int elemento){
+
+        //etapa 1 -> normal, igual BST
+        if(i == null) return new NoAVL(elemento);
+        else if(elemento < i.elemento) i.esq = inserir(i.esq, elemento);
+        else if(elemento > i.elemento) i.dir = inserir(i.dir, elemento);
+        else {
+            System.out.println("erro! Elemento repetido");
+            return i;
+        }
+
+        //etapa 2 -> atualizar altura
+        i.altura = 1 + Math.max(altura(i.esq), altura(i.dir)); 
+        //obs: sua altura será vc (1) + a altura dos seus filhos
+
+        //etapa 3 -> balancear caso necessário
+        return balancear(i);
+    }
+
+    //função pra pegar a altura
+    public int altura(NoAVL i){
+        if(i == null) return -1;
+        else return i.altura;
+    }
+}
