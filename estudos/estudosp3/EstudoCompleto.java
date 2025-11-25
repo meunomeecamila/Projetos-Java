@@ -392,6 +392,156 @@ um do tipo 4.*/
 
 //As fragmentações e desenhos podem ser cobradas, então revisar isso!
 
+//! Árvore bicolor - Alvinegra - Rubronegra
+/*Árvore criada para resolver problemas da 234 e facilitar a sua compreensão. 
+Os nós podem ter duas cores (true or false), que serão um booleano. O nosso professor, 
+Max, utiliza preto e branco para facilitar a compreensão. Mas a árvore realmente
+conhecida é a Rubronegra (vermelho e preto). */
+
+//! O bit de cor da alvinegra não interfere em nada, apenas serve para facilitar o balanceamento
+//? Uma árvore alvinegra está desbalanceada quando temos dois elementos pretos seguidos
+
+// !Elementos pretos: gêmeos na 234 (mesmo nó)
+// ?Elementos brancos: não gêmeos
+
+//Dois pretos seguidos significa uma tendência na inserção e que o grupo de gêmeos estourou
+//*obs: A raiz sempre é branca
+
+//Os gêmeos podem ser representados tanto pela coloração de suas arestas quanto pela de seus nós.
+
+public class NoAN {
+    public NoAN esq;
+    public NoAN dir;
+    public int elemento;
+    public boolean cor; //bit de cor adicionado
+
+    //construtor
+    public NoAN(int x){
+        this.elemento = x;
+        this.cor = true; //todas as cores começam com preto -> true
+        this.esq = null;
+        this.dir = null;
+    }
+}
+
+public class Alvinegra(){
+    public NoAN raiz;
+
+    //construtor
+    public Alvinegra(){
+        this.raiz = null;
+    }
+
+    //!obs: os caminhar ficam iguais, então não implementei novamente
+
+    //!função de inserir
+    /*nessa função, os 3 primeiros nós são implementados manualmente. Se não for nenhum
+    desses casos, chamamos o inserir recursivo normal */
+    
+    public void inserir(int x){
+        //zero elementos
+        if(raiz == null){
+            raiz = new NoAN(x);
+        }
+
+        //apenas um elemento
+        else if(raiz.esq == null && raiz.dir == null){
+
+            if(x < raiz.elemento){ //inserir na esquerda
+                raiz.esq = new NoAN(x);
+            }
+
+            else if(x > raiz.elemento){ //inserir na direita
+                raiz.dir = new NoAN(x);
+            }
+
+            else System.out.println("Item inválido!");
+        }
+
+        //dois elementos sendo raiz e direita
+        else if(raiz.esq == null){
+            //aqui, temos 3 opções de onde o elemento pode estar
+            if(x < raiz.elemento){
+                //único caso em que não é preciso balancear
+                raiz.esq = new NoAN(x);
+            }
+
+            else if(x < raiz.dir.elemento){
+                //aqui, temos a opção de balancear ou de fazer manual
+                //balanceando:
+                //raiz.dir.esq = new NoAN(x);
+                //balancear(raiz); //chama a função de balanceamento
+
+                //fazendo manual:
+                raiz.esq = new NoAN(raiz.elemento); //copia o elemento da raiz
+                raiz.elemento = x; //troca a raiz por x
+            }
+
+            else {
+                //aqui, temos a opção de balancear ou de fazer manual
+                //balanceando:
+                //raiz.dir.dir = new NoAN(x);
+                //balancear(raiz);
+
+                //fazendo manual
+                raiz.esq = new NoAN(raiz.elemento);
+                raiz.elemento = raiz.dir.elemento; 
+                raiz.dir.elemento = x;
+            }
+
+            raiz.dir.cor = false;
+            raiz.esq.cor = false;
+        }
+
+        //dois elementos sendo raiz e esquerda
+        else if(raiz.dir == null){
+            //aqui, temos 3 opções de onde o elemento pode estar
+            if(x > raiz.elemento){
+                //único caso em que não é preciso balancear
+                raiz.dir = new NoAN(x);
+            }
+
+            else if(x > raiz.esq.elemento){
+                //aqui, temos a opção de balancear ou de fazer manual
+                //balanceando:
+                //raiz.esq.dir = new NoAN(x);
+                //balancear(raiz);
+
+                //fazendo manual:
+                raiz.dir = new NoAN(raiz.elemento);
+                raiz.elemento = x;
+            }
+
+            else {
+                //aqui, temos a opção de balancear ou de fazer manual
+                //balanceando:
+                //raiz.esq.esq = new NoAN(x);
+                //balancear(raiz);
+
+                //fazendo manual:
+                raiz.dir = new NoAN(raiz.elemento);
+                raiz.elemento = raiz.esq.elemento;
+                raiz.esq.elemento = x;
+            }
+
+            //no final, temos que garantir a dinamica das cores
+            raiz.dir.cor = false; //branco
+            raiz.esq.cor = false; //branco
+        }
+
+        //se não entrou em nenhum dos anteriores, a árvore tem 3+ elementos
+        //chamamos o inserir recursivo normal
+        else {
+            System.out.println("Árvore com 3 ou mais elementos. Inserindo normalmente...");
+            //inserir(elemento, null, null, null, raiz);
+        }
+
+        //depois do término da inserção, garantir que a raiz esteja branca
+        raiz.cor = false;
+    }
+
+}
+
 
 
 
