@@ -5,7 +5,7 @@ e matérias adjacentes de finalização da disciplina de AED2 */
 //* Matérias p3
 /* 
 - Árvores binárias de busca - ok
-- Balanceamento de árvores binárias (AVL)
+- Balanceamento de árvores binárias (AVL) - ok
 - Árvores 234
 - Árvores bicolor (alvinegras)
 - Tabela hash
@@ -362,4 +362,12 @@ public class AVL {
         }
     }
 }
+
+//! Árvores 234
+/* São estruturas com uma raiz e nós, onde cada nó tem 2, 3 ou 4 filhos
+- Tipo 2 nó -> 1 item, 2 ponteiros
+- Tipo 3 nó -> 2 itens, 3 ponteiros
+- Tipo 4 nó -> 3 itens, 4 ponteiros 
+Sua inserção, remoção e busca vai até no máximo lg n
+*/
 
