@@ -6,7 +6,7 @@ e matérias adjacentes de finalização da disciplina de AED2 */
 /* 
 - Árvores binárias de busca - ok
 - Balanceamento de árvores binárias (AVL) - ok
-- Árvores 234
+- Árvores 234 - ok
 - Árvores bicolor (alvinegras)
 - Tabela hash
  */
@@ -368,6 +368,30 @@ public class AVL {
 - Tipo 2 nó -> 1 item, 2 ponteiros
 - Tipo 3 nó -> 2 itens, 3 ponteiros
 - Tipo 4 nó -> 3 itens, 4 ponteiros 
-Sua inserção, remoção e busca vai até no máximo lg n
+Sua inserção, remoção e busca vai até no máximo lg n na base 2,3 ou 4
+A inserção dos 234 sempre acontece nas folhas, até que elas se lotem.
+Quando elas se lotam, os elementos são redivididos, com o do meio subindo,
+o ds esquerda sendo menor e o da direita, maior.
 */
+
+//Nas árvores 234, temos dois tipos de fragmentação.
+
+//? Fragmentação na subida ou ascensão
+/*Toda vez que ao inserir um elemento, ele for inserido em uma árvore tipo 4 nó, 
+fragmentar o nó e conferir todos os de cima. */
+//!Problema: cria uma cascata se tivermos nós do tipo 4 consecutivos
+
+//? Fragmentação na descida
+/*Quando caminhamos em uma inserção, quebramos o nó toda vez que encontrarmos
+um do tipo 4.*/
+//!Problema: há quebras proativas e talvez, desnecessárias
+//*Solução: evita cascatas 
+
+//TODO - observação: Nós não implementamos o código da AVL, pois usamos ela como
+//TODO - uma introdução para a alvinegra. 
+
+//As fragmentações e desenhos podem ser cobradas, então revisar isso!
+
+
+
 
