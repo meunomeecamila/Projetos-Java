@@ -281,46 +281,85 @@ public class AVL {
 
         return i; 
     }
+
+    //Rotação simples à esquerda 
+    No rotacaoEsq(No i){
+        No j = i.dir;
+        No k = j.esq;
+
+        j.esq = i;
+        i.dir = k;
+
+        // Atualizar alturas
+        i.altura = 1 + Math.max(altura(i.esq), altura(i.dir));
+        j.altura = 1 + Math.max(altura(j.esq), altura(j.dir));
+
+        return j;
+    }
+
+    //Rotação simples à direitaa
+    No rotacaoDir(No i){
+        No j = i.esq;
+        No k = j.dir;
+
+        j.dir = i;
+        i.esq = k;
+
+        // Atualizar alturas
+        i.altura = 1 + Math.max(altura(i.esq), altura(i.dir));
+        j.altura = 1 + Math.max(altura(j.esq), altura(j.dir));
+
+        return j;
+    }
+
+    //Rotação dupla Direita-Esquerda(>)
+    No rotacaoDirEsq(No i){
+        i.dir = rotacaoDir(i.dir);
+        return rotacaoEsq(i);
+    }
+
+    //Rotação dupla Esquerda-Direita(<)
+    No rotacaoEsqDir(No i){
+        i.esq = rotacaoEsq(i.esq);
+        return rotacaoDir(i);
+    }
+
+    //!função de remover
+    //diferenças: precisa atualizar altura, calcular o fator e balancear se necessário
+    public No remover(No i, int elemento){
+        if(i == null){
+            System.out.println("Erro! Não tem esse elemento");
+        }
+        else if(elemento < i.elemento){
+            i.esq = remover(i.esq, elemento);
+        }
+        else if(elemento > i.elemento){
+            i.dir = remover(i.dir, elemento);
+        }
+        else {
+            //achou o elemento -> remover
+            //caso 1 -> sem filhos
+            if(i.esq == null && i.dir == null){
+                return null;
+            }
+
+            //caso 2 -> apenas um filho
+            //filho na direita
+            if(i.esq == null){
+                return i.dir;
+            }
+
+            //filho na esquerda
+            if(i.dir == null){
+                return i.esq;
+            }
+
+            //caso 3: dois filhos
+            //substitui pelo maior da esquerda (ou pelo menor da direita)
+            No maior = maiorNo(i.esq);
+            i.elemento = maior.elemento;
+            i.esq = remover(i.esq, maior.elemento);
+        }
+    }
 }
 
-//Rotação simples à esquerda 
-No rotacaoEsq(No i){
-    No j = i.dir;
-    No k = j.esq;
-
-    j.esq = i;
-    i.dir = k;
-
-     // Atualizar alturas
-    i.altura = 1 + Math.max(altura(i.esq), altura(i.dir));
-    j.altura = 1 + Math.max(altura(j.esq), altura(j.dir));
-
-    return j;
-}
-
-//Rotação simples à direitaa
-No rotacaoDir(No i){
-    No j = i.esq;
-    No k = j.dir;
-
-    j.dir = i;
-    i.esq = k;
-
-     // Atualizar alturas
-    i.altura = 1 + Math.max(altura(i.esq), altura(i.dir));
-    j.altura = 1 + Math.max(altura(j.esq), altura(j.dir));
-
-    return j;
-}
-
-//Rotação dupla Direita-Esquerda(>)
-No rotacaoDirEsq(No i){
-    i.dir = rotacaoDir(i.dir);
-    return rotacaoEsq(i);
-}
-
-//Rotação dupla Esquerda-Direita(<)
-No rotacaoEsqDir(No i){
-    i.esq = rotacaoEsq(i.esq);
-    return rotacaoDir(i);
-}
