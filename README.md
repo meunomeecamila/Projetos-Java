@@ -1,50 +1,79 @@
-# ☕ Exercícios em Java
+# ☕ Exercícios e Estudos em Java
 
-Este repositório reúne códigos em **Java**, organizados em categorias de estudo e prática.  
-O objetivo é consolidar conceitos de programação, estruturas de dados e algoritmos, aplicados em diferentes contextos acadêmicos e de exercícios práticos.
-
----
-
-## 📂 Estrutura do repositório
-
-java-exercicios/
-│── ordenacao/ # Algoritmos de ordenação (Bubble Sort, Insertion Sort, Merge Sort, etc.)
-│── estruturas/ # Estruturas de dados (pilha, fila, lista, árvore, etc.)
-│── exercicios/ # Exercícios gerais de lógica e algoritmos em Java
-│── estudos/ # Estudos voltados para avaliações e revisões
-│ └── estudosp1/ # Materiais e exercícios de preparação para a Prova 1
-
+Este repositório reúne códigos e materiais de estudo em **Java**, organizados por tema e por etapas da disciplina.  
+O objetivo principal é consolidar conceitos de **programação**, **estruturas de dados**, **algoritmos** e **preparação para provas**, por meio de implementações práticas e resumos teóricos.
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## 🛠️ Tecnologias Utilizadas
 
 - **Java 17+**  
 - **JDK + JRE**  
-- IDEs: **IntelliJ IDEA** ou **VS Code**  
-- Estrutura modular com pacotes por tema  
+- IDE recomendada: **IntelliJ IDEA** (VS Code também funciona)  
+- Organização modular por pacotes  
+- Utilização sugerida da extensão **Better Comments** para realçar partes importantes dos resumos
 
 ---
 
-## 🎯 Aprendizados
+## 🎯 Conteúdos Abordados
 
-- Implementação de **estruturas de dados** clássicas em Java (pilha, fila, listas encadeadas, etc.).  
-- Prática de **algoritmos de ordenação** e análise de complexidade.  
-- Resolução de **exercícios de lógica** usando programação orientada a objetos.  
-- Organização do estudo para avaliações acadêmicas (**estudosP1**).  
-- Uso de boas práticas com **pacotes**, **classes** e **métodos bem definidos**.  
+### Estruturas de Dados
+- Pilhas  
+- Filas  
+- Listas encadeadas  
+- Árvores (Binária, AVL, 2-3-4)  
+- Hashing  
+
+### Algoritmos
+- Ordenações básicas e avançadas  
+- Percursos em árvores  
+- Manipulação de listas, vetores e matrizes  
+
+### Programação
+- Fundamentos da linguagem Java  
+- Programação Orientada a Objetos  
+- Modularização e boas práticas  
+
+### Material para Provas
+- **Resumos separados por prova** (P1, P2 e P3)  
+- **Arquivo Estudo Completo** consolidando todo o conteúdo da disciplina  
+- **Exemplos práticos inspirados em provas reais**  
+- Comentários organizados com *Better Comments* para facilitar a leitura  
+
+### Trabalhos Práticos (TP)
+- Implementações completas dos TPs da disciplina de **AED2**  
+- Inclusão de estruturas específicas, árvores, hashing, manipulação de arquivos e outros temas  
 
 ---
 
-## 🔮 Possíveis melhorias
+## 📘 Recomendações de Uso
 
-- Adicionar testes automatizados (JUnit) para validar os algoritmos.  
-- Incluir explicações teóricas junto dos códigos (ex.: comentários sobre complexidade).  
-- Expandir a pasta `estudos` com revisões de outras provas (P2, exame final).  
-- Criar um `Makefile` ou script para compilação/execução mais rápida.  
+- Utilize a extensão **Better Comments** para visualizar:
+  - Destaques de teoria  
+  - Alertas  
+  - Observações de prova  
+  - Explicações importantes  
+
+- Consulte o diretório `estudo_completo/` antes das avaliações para revisar todo o conteúdo de uma só vez.
+
+---
+
+## 🔮 Melhorias Futuras
+
+- Implementar testes automatizados com JUnit  
+- Documentar a complexidade de tempo e espaço dos algoritmos  
+- Criar representações visuais de estruturas (árvores, listas, grafos)  
+- Criar scripts de compilação/execução para facilitar o uso  
+- Acrescentar exercícios extras com gabarito comentado  
 
 ---
 
 ## 👩‍💻 Autoria
 
-Repositório mantido por **Camila Cardoso de Menezes**, como parte dos estudos de **Java e Estruturas de Dados**.
+Repositório desenvolvido e mantido por **Camila Cardoso de Menezes**, como parte dos estudos em:
+
+- **Java**  
+- **Estruturas de Dados**  
+- **Algoritmos**  
+- **Preparação para avaliações acadêmicas**  
+
