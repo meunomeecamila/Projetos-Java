@@ -89,40 +89,34 @@ public class Main {
     //Ler IDs e guardar Nomes no vetor adicional
     //obs: talvez mudar o nome da função depois
     public static String[] lerIdsGuardarNomes(Game[] vetor, int n) {
-        Scanner sc = new Scanner(System.in);
-        String entrada;
-        String[] vetorNomes = new String[n];
-        int cont = 0;
+    ArrayList<String> nomes = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
 
-        while (sc.hasNext()) {
-            entrada = sc.next();
+    while (sc.hasNextLine()) {
+        String entrada = sc.nextLine().trim();
 
-            // verifica se é "FIM"
-            //usando charAt 
-            if (entrada.length() == 3 &&
-                entrada.charAt(0) == 'F' &&
-                entrada.charAt(1) == 'I' &&
-                entrada.charAt(2) == 'M') {
-                break;
-            }
+        if (entrada.equals("FIM")) break; // o Verde envia exatamente "FIM"
 
-            int id = Integer.parseInt(entrada);
-            String nomeEncontrado = buscarNomePorId(vetor, n, id);
+        // converte o id e busca o nome correspondente
+        int id = Integer.parseInt(entrada);
+        String nomeEncontrado = buscarNomePorId(vetor, n, id);
 
-            if (!nomeEncontrado.equals("")) {
-                vetorNomes[cont] = nomeEncontrado;
-                cont++;
-            }
+        if (!nomeEncontrado.equals("")) {
+            nomes.add(nomeEncontrado);
         }
-
-        // reduzir o tamanho do vetor para a quantidade real de nomes
-        String[] vetorFinal = new String[cont];
-        for (int i = 0; i < cont; i++) {
-            vetorFinal[i] = vetorNomes[i];
-        }
-
-        return vetorFinal;
     }
+
+    sc.close();
+
+    // converte ArrayList em vetor
+    String[] vetorNomes = new String[nomes.size()];
+    for (int i = 0; i < nomes.size(); i++) {
+        vetorNomes[i] = nomes.get(i);
+    }
+
+    return vetorNomes;
+}
+
 
     // FUNÇÃO 2 - Busca linear por ID no vetor de games
     public static String buscarNomePorId(Game[] vetor, int n, int id) {
