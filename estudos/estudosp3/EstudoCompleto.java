@@ -550,11 +550,11 @@ public class Alvinegra(){
         if(i == null){ //momento de inserir
             //se não tivermos i, olhamos o pai
             if(x < pai.elemento){
-                i.esq = new NoAN(x);
+                pai.esq = new NoAN(x);
             }
 
             else{
-                i.dir = new NoAN(x);
+                pai.dir = new NoAN(x);
             }
 
             //após qualquer inserção, conferimos a cor do pai
@@ -571,7 +571,8 @@ public class Alvinegra(){
             if(isNo4(i) == true){
                 //trocar as cores
                 i.cor = true;
-                i.esq.cor = i.dir.cor = false;
+                i.esq.cor = false;
+                i.dir.cor = false;
 
                 //conferir novamente a cor do pai
                 if(pai.cor == true){
@@ -580,8 +581,8 @@ public class Alvinegra(){
             }
 
             //agora que conferimos, continuar caminhando
-            if(x < i.elemento) inserir(avo, pai, i, i.esq);
-            else if(x > i.elemento) inserir(avo, pai, i, i.dir);
+            if(x < i.elemento) inserir(x, avo, pai, i, i.esq);
+            else if(x > i.elemento) inserir(x, avo, pai, i, i.dir);
             else System.out.println("erro");
 
 
@@ -597,48 +598,60 @@ public class Alvinegra(){
     }
 
     //função de balancear
-    private void balancear(NoAN bisa, NoAN avo, NoAN pai, NoAN i){
-        //se o pai é preto (true), rotacionar o avô
-        if(pai.cor == true){
-            //aqui, temos os 4 tipos de balanceamento
-            if(pai.elemento > avo.elemento){
-                //manco para a direita, rotacionar para esquerda
-                //um dos dois casos (simples esq ou dupla dir-esq)
+    private void balancear(NoAN bisa, NoAN avo, NoAN pai, NoAN i) {
+        //conferir a cor do pai
+        if (pai.cor == true) {
+            //aqui, temos que conferir qual dos casos de rotação será utilizado
 
-                //simples esq
-                if(i.elemento > pai.elemento){
+            //manco à direita (pai está à direita do avô)
+            if (pai.elemento > avo.elemento) {
+
+                // Caso RR (i à direita do pai)
+                if (i.elemento > pai.elemento) {
                     avo = rotacaoEsq(avo);
                 }
 
-                else avo = rotacaoDirEsq(avo);
+                // Caso RL (i à esquerda do pai)
+                else {
+                    avo = rotacaoDirEsq(avo);
+                }
             }
 
+            // Manco à esquerda (pai está à esquerda do avô)
             else {
-                //manco para a esquerda, rotacionar para direita
-                //um dos dois casos (simples dir ou dupla esq-dir)
 
-                //simples dir
-                if(i.elemento < pai.elemento){
+                // Caso LL (i à esquerda do pai)
+                if (i.elemento < pai.elemento) {
                     avo = rotacaoDir(avo);
                 }
-
-                else avo = rotacaoEsqDir(avo);
+                // Caso LR (i à direita do pai)
+                else {
+                    avo = rotacaoEsqDir(avo);
+                }
             }
 
-            //agora que rotacionou, fazer as conferências e reestabelecer as cores
-            //conferir o bisavo
-            if(bisa == null){
-                raiz = avo;
+            //agora que chegou até aqui, fazer as conferências e ajustes
+            //conferir o bisavô
+            if (bisa == null) {
+                raiz = avo;        // o avô é agora a nova raiz
+            }
+            else if (avo.elemento < bisa.elemento) {
+                bisa.esq = avo;
+            }
+            else {
+                bisa.dir = avo;
             }
 
-            else if(avo.elemento < bisa.elemento) bisa.esq = avo;
-            else bisa.dir = avo;
-
-            //reestabelecer as cores
+            //ajuste de cores
+            // avô vira branco (não-gêmeo)
             avo.cor = false;
-            avo.esq.cor = avo.dir.cor = true;
+
+            // seus filhos viram pretos (gêmeos)
+            if (avo.esq != null) avo.esq.cor = true;
+            if (avo.dir != null) avo.dir.cor = true;
         }
     }
+
 
     //quatro rotações possíveis
     //* Opções de rotação
@@ -659,7 +672,7 @@ public class Alvinegra(){
     Rotação é no: primeira no pai, segunda no avô*/
 
     //Rotação simples à esquerda 
-    No rotacaoEsq(No i){
+    NoAN rotacaoEsq(No i){
         No j = i.dir;
         No k = j.esq;
 
@@ -670,7 +683,7 @@ public class Alvinegra(){
     }
 
     //Rotação simples à direitaa
-    No rotacaoDir(No i){
+    NoAN rotacaoDir(No i){
         No j = i.esq;
         No k = j.dir;
 
@@ -681,13 +694,13 @@ public class Alvinegra(){
     }
 
     //Rotação dupla Direita-Esquerda(>)
-    No rotacaoDirEsq(No i){
+    NoAN rotacaoDirEsq(No i){
         i.dir = rotacaoDir(i.dir);
         return rotacaoEsq(i);
     }
 
     //Rotação dupla Esquerda-Direita(<)
-    No rotacaoEsqDir(No i){
+    NoAN rotacaoEsqDir(No i){
         i.esq = rotacaoEsq(i.esq);
         return rotacaoDir(i);
     }
