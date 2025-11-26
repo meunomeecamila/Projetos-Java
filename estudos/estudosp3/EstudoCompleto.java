@@ -392,6 +392,10 @@ um do tipo 4.*/
 
 //As fragmentações e desenhos podem ser cobradas, então revisar isso!
 
+
+
+
+
 //! Árvore bicolor - Alvinegra - Rubronegra
 /*Árvore criada para resolver problemas da 234 e facilitar a sua compreensão. 
 Os nós podem ter duas cores (true or false), que serão um booleano. O nosso professor, 
@@ -538,6 +542,154 @@ public class Alvinegra(){
 
         //depois do término da inserção, garantir que a raiz esteja branca
         raiz.cor = false;
+    }
+
+    //função recursiva de inserir elemento com 4 ponteiros
+    //entraremos nessa função no caso de a árvore ter 3+ elementos
+    private void inserir(int x, NoAN bisa, NoAN avo, NoAN pai, NoAN i){
+        if(i == null){ //momento de inserir
+            //se não tivermos i, olhamos o pai
+            if(x < pai.elemento){
+                i.esq = new NoAN(x);
+            }
+
+            else{
+                i.dir = new NoAN(x);
+            }
+
+            //após qualquer inserção, conferimos a cor do pai
+            if(pai.cor == true){
+                balancear(bisa, avo, pai, i);
+            }
+        }
+
+        else {
+            //se chegou até aqui, significa que i ainda não é null
+            //então, vamos andar para a frente
+            //para isso, precisamos sempre conferir se é um nó do tipo 4
+            
+            if(isNo4(i) == true){
+                //trocar as cores
+                i.cor = true;
+                i.esq.cor = i.dir.cor = false;
+
+                //conferir novamente a cor do pai
+                if(pai.cor == true){
+                    balancear(bisa, avo, pai, i);
+                }
+            }
+
+            //agora que conferimos, continuar caminhando
+            if(x < i.elemento) inserir(avo, pai, i, i.esq);
+            else if(x > i.elemento) inserir(avo, pai, i, i.dir);
+            else System.out.println("erro");
+
+
+        }
+    }
+
+    //função que verifica se um nó é do tipo 4
+    public boolean isNo4(NoAN i){
+        if(i.esq != null && i.dir != null && i.esq.cor == true && i.dir.cor == true){
+            return true;
+        }
+        else return false;
+    }
+
+    //função de balancear
+    private void balancear(NoAN bisa, NoAN avo, NoAN pai, NoAN i){
+        //se o pai é preto (true), rotacionar o avô
+        if(pai.cor == true){
+            //aqui, temos os 4 tipos de balanceamento
+            if(pai.elemento > avo.elemento){
+                //manco para a direita, rotacionar para esquerda
+                //um dos dois casos (simples esq ou dupla dir-esq)
+
+                //simples esq
+                if(i.elemento > pai.elemento){
+                    avo = rotacaoEsq(avo);
+                }
+
+                else avo = rotacaoDirEsq(avo);
+            }
+
+            else {
+                //manco para a esquerda, rotacionar para direita
+                //um dos dois casos (simples dir ou dupla esq-dir)
+
+                //simples dir
+                if(i.elemento < pai.elemento){
+                    avo = rotacaoDir(avo);
+                }
+
+                else avo = rotacaoEsqDir(avo);
+            }
+
+            //agora que rotacionou, fazer as conferências e reestabelecer as cores
+            //conferir o bisavo
+            if(bisa == null){
+                raiz = avo;
+            }
+
+            else if(avo.elemento < bisa.elemento) bisa.esq = avo;
+            else bisa.dir = avo;
+
+            //reestabelecer as cores
+            avo.cor = false;
+            avo.esq.cor = avo.dir.cor = true;
+        }
+    }
+
+    //quatro rotações possíveis
+    //* Opções de rotação
+    //TODO - Rotação simples à direita
+    /* Acontece quando: árvore está toda manca pra esquerda
+    Rotação é no: avô */
+
+    //TODO - Rotação simples à esquerda
+    /* Acontece quando: árvore está toda manca pra direita
+    Rotação é no: avô*/
+
+    //TODO - Rotação dupla esq-dir
+    /* Acontece quando: árvore está manca pra esquerda e depois direita (<)
+    Rotação é no: primeira no pai, segunda no avô*/
+
+    //TODO - Rotação dupla dir-esq
+    /* Acontece quando: árvore está manca pra direita e depois esquerda (>)
+    Rotação é no: primeira no pai, segunda no avô*/
+
+    //Rotação simples à esquerda 
+    No rotacaoEsq(No i){
+        No j = i.dir;
+        No k = j.esq;
+
+        j.esq = i;
+        i.dir = k;
+
+        return j;
+    }
+
+    //Rotação simples à direitaa
+    No rotacaoDir(No i){
+        No j = i.esq;
+        No k = j.dir;
+
+        j.dir = i;
+        i.esq = k;
+
+        return j;
+    }
+
+    //Rotação dupla Direita-Esquerda(>)
+    No rotacaoDirEsq(No i){
+        i.dir = rotacaoDir(i.dir);
+        return rotacaoEsq(i);
+    }
+
+    //Rotação dupla Esquerda-Direita(<)
+    No rotacaoEsqDir(No i){
+        i.esq = rotacaoEsq(i.esq);
+        return rotacaoDir(i);
     }
 
 }
