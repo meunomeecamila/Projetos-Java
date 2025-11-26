@@ -474,7 +474,7 @@ public class Alvinegra(){
                 //aqui, temos a opção de balancear ou de fazer manual
                 //balanceando:
                 //raiz.dir.esq = new NoAN(x);
-                //balancear(raiz); //chama a função de balanceamento
+                //balancearRaiz(); //chama a função de balanceamento
 
                 //fazendo manual:
                 raiz.esq = new NoAN(raiz.elemento); //copia o elemento da raiz
@@ -485,7 +485,7 @@ public class Alvinegra(){
                 //aqui, temos a opção de balancear ou de fazer manual
                 //balanceando:
                 //raiz.dir.dir = new NoAN(x);
-                //balancear(raiz);
+                //balancearRaiz();
 
                 //fazendo manual
                 raiz.esq = new NoAN(raiz.elemento);
@@ -704,6 +704,63 @@ public class Alvinegra(){
         i.esq = rotacaoEsq(i.esq);
         return rotacaoDir(i);
     }
+
+    //função de balancear para o caso comentado no inserir com 0,1 ou 2 elementos
+    //essa função apenas funcionará se descomentarmos o trecho
+    private void balancearRaiz() {
+        
+        // CASO 1 — só existe filho à direita (raiz + dir)
+        if (raiz.esq == null && raiz.dir != null) {
+
+            // RR: novo elemento é maior que a direita da raiz
+            if (raiz.dir.dir != null) {
+                raiz = rotacaoEsq(raiz);
+            }
+
+            // RL: novo elemento está entre raiz e raiz.dir
+            else if (raiz.dir.esq != null) {
+                raiz = rotacaoDirEsq(raiz);
+            }
+
+            // recolorir
+            raiz.cor = false;
+            raiz.esq.cor = true;
+            raiz.dir.cor = true;
+
+            return;
+        }
+
+        // CASO 2 — só existe filho à esquerda (raiz + esq)
+        if (raiz.dir == null && raiz.esq != null) {
+
+            // LL
+            if (raiz.esq.esq != null) {
+                raiz = rotacaoDir(raiz);
+            }
+
+            // LR
+            else if (raiz.esq.dir != null) {
+                raiz = rotacaoEsqDir(raiz);
+            }
+
+            // recolorir
+            raiz.cor = false;
+            raiz.esq.cor = true;
+            raiz.dir.cor = true;
+
+            return;
+        }
+
+        // CASO 3 — já possui esq e dir (caso em que só recolorimos)
+        if (raiz.esq != null && raiz.dir != null) {
+
+            raiz.cor = false;
+            raiz.esq.cor = true;
+            raiz.dir.cor = true;
+        }
+    }
+
+
 
 }
 
