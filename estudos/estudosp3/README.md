@@ -120,4 +120,26 @@ public void caminharpos(NoAN i){
 }
 ```
 
+---
+
+## Pesquisa
+Retorna true se o elemento estiver na árvore e false se não estiver
+
+```java
+public boolean pesquisar(int x, NoAN i){
+    if(i == null){
+        //procurou na árvore toda e não achou
+        return false;
+    }
+
+    else if(x < i.elemento) return pesquisar(x, i.esq);
+    else if(x > i.elemento) return pesquisar(x, i.dir);
+
+    else return true;
+}
+```
+
+
+
+
 
