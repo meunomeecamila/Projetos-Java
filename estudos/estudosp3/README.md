@@ -88,36 +88,36 @@ Os "caminhar" são utilizados para percorrer a árvore, e permanecem os mesmos d
 Lista todos os elementos em ordem crescente
 
 ```java
-    public void caminharcentral(NoAN i){
-        if(i == null) return;
-        caminharcentral(i.esq);
-        System.out.println(i.elemento); //ou outra função
-        caminharcentral(i.dir);
-    }
+public void caminharcentral(NoAN i){
+    if(i == null) return;
+    caminharcentral(i.esq);
+    System.out.println(i.elemento); //ou outra função
+    caminharcentral(i.dir);
+}
 ```
 
 ### Caminhar pré
 Lista primeiro o nó e depois seus filhos
 
 ```java
-    public void caminharpre(NoAN i){
-        if(i == null) return;
-        System.out.println(i.elemento); //ou outra função
-        caminharpre(i.esq);
-        caminharpre(i.dir);
-    }
+public void caminharpre(NoAN i){
+    if(i == null) return;
+    System.out.println(i.elemento); //ou outra função
+    caminharpre(i.esq);
+    caminharpre(i.dir);
+}
 ```
 
 ### Caminhar pós
 Lista primeiro os filhos e por último o nó
 
 ```java
-    public void caminharpos(NoAN i){
-        if(i == null) return;
-        caminharpos(i.esq);
-        caminharpos(i.dir);
-        System.out.println(i.elemento); //ou outra função
-    }
+public void caminharpos(NoAN i){
+    if(i == null) return;
+    caminharpos(i.esq);
+    caminharpos(i.dir);
+    System.out.println(i.elemento); //ou outra função
+}
 ```
 
 
