@@ -37,6 +37,28 @@ O arquivo contém explicações em forma de texto e comentários, assim como ima
 visualizar os nós e estruturas em cada trecho.  
 
 ### Dica extra
-Recomenda-se baixar a extensão Better Comments caso for analisar o código.
+Recomenda-se baixar a extensão *Better Comments* caso for analisar o código.
+
+---
 
 # Nó da Alvinegra
+O nó da AN funciona como os outros, porém tem um bit de cor adicionado.  
+No seu construtor, o bit sempre começa com *true* (preto), considerando assim os novos
+nós adicionados são gêmeos do pai
+
+```java
+//! Classe Nó Alvinegra
+class NoAN {
+    public int elemento;
+    public NoAN esq, dir;
+    public boolean cor; //true = preto, false = branco
+
+    //construtor
+    public NoAN(int elemento){
+        this.elemento = elemento;
+        this.esq = null;
+        this.dir = null;
+        this.cor = true; //mantendo seu padrão
+    }
+}
+```
