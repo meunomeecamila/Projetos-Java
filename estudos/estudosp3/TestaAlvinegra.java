@@ -11,7 +11,7 @@ class NoAN {
         this.elemento = elemento;
         this.esq = null;
         this.dir = null;
-        this.cor = true; //mantendo seu padrão
+        this.cor = true; 
     }
 }
 

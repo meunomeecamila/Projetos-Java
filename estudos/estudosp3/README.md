@@ -58,7 +58,66 @@ class NoAN {
         this.elemento = elemento;
         this.esq = null;
         this.dir = null;
-        this.cor = true; //mantendo seu padrão
+        this.cor = true; 
     }
 }
 ```
+---
+
+# Árvore Alvinegra
+A classe da Árvore Alvinegra começa apenas com a sua raiz, que é nula inicialmente.
+
+```java
+//! Classe árvore alvinegra
+class Alvinegra {
+    public NoAN raiz;
+
+    //construtor
+    public Alvinegra(){
+        this.raiz = null;
+    }
+}
+```
+
+A partir de agora, veremos todas as funções que podem estar contidas na sua classe  
+## Funções de caminhar
+Os "caminhar" são utilizados para percorrer a árvore, e permanecem os mesmos das outras
+árvores estudadas. São eles: 
+
+### Caminhar central
+Lista todos os elementos em ordem crescente
+
+```java
+    public void caminharcentral(NoAN i){
+        if(i == null) return;
+        caminharcentral(i.esq);
+        System.out.println(i.elemento); //ou outra função
+        caminharcentral(i.dir);
+    }
+```
+
+### Caminhar pré
+Lista primeiro o nó e depois seus filhos
+
+```java
+    public void caminharpre(NoAN i){
+        if(i == null) return;
+        System.out.println(i.elemento); //ou outra função
+        caminharpre(i.esq);
+        caminharpre(i.dir);
+    }
+```
+
+### Caminhar pós
+Lista primeiro os filhos e por último o nó
+
+```java
+    public void caminharpos(NoAN i){
+        if(i == null) return;
+        caminharpos(i.esq);
+        caminharpos(i.dir);
+        System.out.println(i.elemento); //ou outra função
+    }
+```
+
+
