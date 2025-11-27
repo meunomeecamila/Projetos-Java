@@ -7,7 +7,7 @@ e matérias adjacentes de finalização da disciplina de AED2 */
 - Árvores binárias de busca - ok
 - Balanceamento de árvores binárias (AVL) - ok
 - Árvores 234 - ok
-- Árvores bicolor (alvinegras)
+- Árvores bicolor (alvinegras) - ok
 - Tabela hash
  */
 
@@ -708,7 +708,7 @@ public class Alvinegra(){
     //função de balancear para o caso comentado no inserir com 0,1 ou 2 elementos
     //essa função apenas funcionará se descomentarmos o trecho
     private void balancearRaiz() {
-        
+
         // CASO 1 — só existe filho à direita (raiz + dir)
         if (raiz.esq == null && raiz.dir != null) {
 
