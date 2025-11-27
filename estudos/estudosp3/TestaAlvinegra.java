@@ -1,4 +1,22 @@
-public class Alvinegra {
+import java.util.Scanner;
+
+//! Classe Nó Alvinegra
+class NoAN {
+    public int elemento;
+    public NoAN esq, dir;
+    public boolean cor; //true = preto, false = branco
+
+    //construtor
+    public NoAN(int elemento){
+        this.elemento = elemento;
+        this.esq = null;
+        this.dir = null;
+        this.cor = true; //mantendo seu padrão
+    }
+}
+
+//! Classe árvore alvinegra
+class Alvinegra {
     public NoAN raiz;
 
     //construtor
@@ -6,7 +24,7 @@ public class Alvinegra {
         this.raiz = null;
     }
 
-    //caminhar central 
+    //! caminhar central 
     //lista todos os elementos em ordem crescente
     public void caminharcentral(NoAN i){
         if(i == null) return;
@@ -15,7 +33,7 @@ public class Alvinegra {
         caminharcentral(i.dir);
     }
 
-    //caminhar pré-ordem
+    //! caminhar pré-ordem
     //lista primeiro o nó e depois seus filhos
     public void caminharpre(NoAN i){
         if(i == null) return;
@@ -24,13 +42,27 @@ public class Alvinegra {
         caminharpre(i.dir);
     }
 
-    //caminhar pós-ordem
+    //! caminhar pós-ordem
     //lista primeiro os filhos e por último o nó
     public void caminharpos(NoAN i){
         if(i == null) return;
         caminharpos(i.esq);
         caminharpos(i.dir);
         System.out.println(i.elemento); //ou outra função
+    }
+
+    //!função de pesquisar
+    /*retorna true se o elemento estiver na árvore e false se não estiver */
+    public boolean pesquisar(int x, NoAN i){
+        if(i == null){
+            //procurou na árvore toda e não achou
+            return false;
+        }
+
+        else if(x < i.elemento) return pesquisar(x, i.esq);
+        else if(x > i.elemento) return pesquisar(x, i.dir);
+
+        else return true;
     }
 
     //!função de inserir
@@ -59,30 +91,16 @@ public class Alvinegra {
 
         //dois elementos sendo raiz e direita
         else if(raiz.esq == null){
-            //aqui, temos 3 opções de onde o elemento pode estar
             if(x < raiz.elemento){
-                //único caso em que não é preciso balancear
                 raiz.esq = new NoAN(x);
             }
 
             else if(x < raiz.dir.elemento){
-                //aqui, temos a opção de balancear ou de fazer manual
-                //balanceando:
-                //raiz.dir.esq = new NoAN(x);
-                //balancearRaiz(); //chama a função de balanceamento
-
-                //fazendo manual:
-                raiz.esq = new NoAN(raiz.elemento); //copia o elemento da raiz
-                raiz.elemento = x; //troca a raiz por x
+                raiz.esq = new NoAN(raiz.elemento);
+                raiz.elemento = x;
             }
 
             else {
-                //aqui, temos a opção de balancear ou de fazer manual
-                //balanceando:
-                //raiz.dir.dir = new NoAN(x);
-                //balancearRaiz();
-
-                //fazendo manual
                 raiz.esq = new NoAN(raiz.elemento);
                 raiz.elemento = raiz.dir.elemento; 
                 raiz.dir.elemento = x;
@@ -94,57 +112,37 @@ public class Alvinegra {
 
         //dois elementos sendo raiz e esquerda
         else if(raiz.dir == null){
-            //aqui, temos 3 opções de onde o elemento pode estar
             if(x > raiz.elemento){
-                //único caso em que não é preciso balancear
                 raiz.dir = new NoAN(x);
             }
 
             else if(x > raiz.esq.elemento){
-                //aqui, temos a opção de balancear ou de fazer manual
-                //balanceando:
-                //raiz.esq.dir = new NoAN(x);
-                //balancear(raiz);
-
-                //fazendo manual:
                 raiz.dir = new NoAN(raiz.elemento);
                 raiz.elemento = x;
             }
 
             else {
-                //aqui, temos a opção de balancear ou de fazer manual
-                //balanceando:
-                //raiz.esq.esq = new NoAN(x);
-                //balancear(raiz);
-
-                //fazendo manual:
                 raiz.dir = new NoAN(raiz.elemento);
                 raiz.elemento = raiz.esq.elemento;
                 raiz.esq.elemento = x;
             }
 
-            //no final, temos que garantir a dinamica das cores
             raiz.dir.cor = false; //branco
             raiz.esq.cor = false; //branco
         }
 
         //se não entrou em nenhum dos anteriores, a árvore tem 3+ elementos
-        //chamamos o inserir recursivo normal
         else {
             System.out.println("Árvore com 3 ou mais elementos. Inserindo normalmente...");
-            // CHAMADA CORRETA:
             inserir(x, null, null, null, raiz);
         }
 
-        //depois do término da inserção, garantir que a raiz esteja branca
         raiz.cor = false;
     }
 
     //função recursiva de inserir elemento com 4 ponteiros
-    //entraremos nessa função no caso de a árvore ter 3+ elementos
     private void inserir(int x, NoAN bisa, NoAN avo, NoAN pai, NoAN i){
-        if(i == null){ //momento de inserir
-
+        if(i == null){
             if(x < pai.elemento){
                 pai.esq = new NoAN(x);
                 i = pai.esq;
@@ -154,15 +152,12 @@ public class Alvinegra {
                 i = pai.dir;
             }
 
-            //após qualquer inserção, conferimos a cor do pai
             if(pai.cor == true){
                 balancear(bisa, avo, pai, i);
             }
         }
 
         else {
-            //se chegou até aqui, significa que i ainda não é null
-
             if(isNo4(i) == true){
                 i.cor = true;
                 i.esq.cor = false;
@@ -190,6 +185,7 @@ public class Alvinegra {
     //função de balancear
     private void balancear(NoAN bisa, NoAN avo, NoAN pai, NoAN i) {
         if (pai.cor == true) {
+
             if (pai.elemento > avo.elemento) {
                 if (i.elemento > pai.elemento) {
                     avo = rotacaoEsq(avo);
@@ -302,4 +298,90 @@ public class Alvinegra {
         }
     }
 
+}
+
+//Main com menu interativo
+public class TestaAlvinegra {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Alvinegra arvore = new Alvinegra();
+
+        int opcao = -1;
+        while (opcao != 0) {
+            System.out.println("\nÁRVORE ALVINEGRA");
+            System.out.println("1 - Inserir elemento");
+            System.out.println("2 - Pesquisar elemento");
+            System.out.println("3 - Caminhar CENTRAL (em ordem)");
+            System.out.println("4 - Caminhar PRE-ORDEM");
+            System.out.println("5 - Caminhar POS-ORDEM");
+            System.out.println("6 - Mostrar raiz e filhos");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha uma opção: ");
+
+            opcao = sc.nextInt();
+
+            switch(opcao){
+
+                case 1:
+                    System.out.print("\nDigite o elemento a inserir: ");
+                    int x = sc.nextInt();
+                    arvore.inserir(x);
+                    System.out.println("Elemento " + x + " inserido!");
+                    break;
+
+                case 2:
+                    System.out.print("\nDigite o elemento a pesquisar: ");
+                    int p = sc.nextInt();
+                    boolean achou = arvore.pesquisar(p, arvore.raiz);
+                    if(achou) System.out.println("Elemento encontrado!");
+                    else System.out.println("Elemento NÃO encontrado.");
+                    break;
+
+                case 3:
+                    System.out.println("\nCaminhar CENTRAL:");
+                    arvore.caminharcentral(arvore.raiz);
+                    break;
+
+                case 4:
+                    System.out.println("\nCaminhar PRE-ORDEM:");
+                    arvore.caminharpre(arvore.raiz);
+                    break;
+
+                case 5:
+                    System.out.println("\nCaminhar POS-ORDEM:");
+                    arvore.caminharpos(arvore.raiz);
+                    break;
+
+                case 6:
+                    System.out.println("\n--- ESTADO DA RAIZ ---");
+                    if(arvore.raiz == null){
+                        System.out.println("Árvore vazia.");
+                    }
+                    else{
+                        System.out.println("Raiz: " + arvore.raiz.elemento + " | cor = " + arvore.raiz.cor);
+
+                        if(arvore.raiz.esq != null)
+                            System.out.println(" ├─ Esquerda: " + arvore.raiz.esq.elemento + " | cor = " + arvore.raiz.esq.cor);
+                        else
+                            System.out.println(" ├─ Esquerda: null");
+
+                        if(arvore.raiz.dir != null)
+                            System.out.println(" └─ Direita: " + arvore.raiz.dir.elemento + " | cor = " + arvore.raiz.dir.cor);
+                        else
+                            System.out.println(" └─ Direita: null");
+                    }
+                    break;
+
+                case 0:
+                    System.out.println("Encerrando...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+
+        sc.close();
+    }
 }
