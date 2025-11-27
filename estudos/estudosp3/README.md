@@ -79,7 +79,7 @@ class Alvinegra {
 }
 ```
 
-A partir de agora, veremos todas as funções que podem estar contidas na sua classe  
+A partir de agora, veremos as funções que podem estar contidas na sua classe  
 ## Funções de caminhar
 Os "caminhar" são utilizados para percorrer a árvore, e permanecem os mesmos das outras
 árvores estudadas. São eles: 
