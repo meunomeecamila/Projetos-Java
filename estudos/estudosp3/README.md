@@ -356,13 +356,13 @@ public boolean isNo4(NoAN i){
 ## Função de balancear
 
 A função de balancear apenas acontecerá se a cor do pai for **true**.  
-Assim, temos dois casos:  
+Assim, temos dois casos:    
 
-Caso 1: Pai é maior que Avô  
+Caso 1: Pai é maior que Avô    
 Nesse caso, a árvore está manca para a **direita** e logo, a rotação mais importante
-acontecerá na **esquerda**.  
-Se o elemento atual for maior que o pai, a rotação é **Simples à esquerda** (ex 1). 
-Se o elemento atual for menor que o pai, a rotação é **Dupla Dir-Esq** (ex 2).
+acontecerá na **esquerda**.    
+Se o elemento atual for maior que o pai, a rotação é **Simples à esquerda** (ex 1).   
+Se o elemento atual for menor que o pai, a rotação é **Dupla Dir-Esq** (ex 2).  
 
 ```java
 
@@ -384,11 +384,11 @@ private void balancear(NoAN bisa, NoAN avo, NoAN pai, NoAN i) {
         } //continua
 ```
 
-Caso 2: Pai é menor que Avô  
+Caso 2: Pai é menor que Avô    
 Nesse caso, a árvore está manca para a **esquerda** e logo, a rotação mais importante
-acontecerá na **direita**.  
-Se o elemento atual for menor que o pai, a rotação é **Simples à direita** (ex 3). 
-Se o elemento atual for maior que o pai, a rotação é **Dupla Esq-Dir** (ex 4).
+acontecerá na **direita**.    
+Se o elemento atual for menor que o pai, a rotação é **Simples à direita** (ex 3).   
+Se o elemento atual for maior que o pai, a rotação é **Dupla Esq-Dir** (ex 4).  
 
 ```java
 
