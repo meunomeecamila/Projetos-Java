@@ -139,6 +139,121 @@ public boolean pesquisar(int x, NoAN i){
 }
 ```
 
+---
+
+## Função de inserir iterativa
+### Inserir os 3 primeiros elementos
+Nessa função, implementamos os 3 primeiros nós de forma manual, porque a lógica recursiva do inserir só funciona quando você já tem pelo menos uma subárvore inteira para percorrer.  
+Se não for um desses casos, chamamos o inserir recursivo normal. 
+
+No *bloco abaixo*, tratamos dois casos. 
+- Caso 1: 0 elementos -> apenas insere na raiz
+- Caso 2: 1 elemento -> insere na direita ou na esquerda da raiz
+Esses dois primeiros casos acontecem normalmente
+
+```java
+
+public void inserir(int x){
+        //zero elementos
+        if(raiz == null){
+            raiz = new NoAN(x);
+        }
+
+        //apenas um elemento
+        else if(raiz.esq == null && raiz.dir == null){
+
+            if(x < raiz.elemento){ //inserir na esquerda
+                raiz.esq = new NoAN(x);
+            }
+
+            else if(x > raiz.elemento){ //inserir na direita
+                raiz.dir = new NoAN(x);
+            }
+
+            else System.out.println("Item inválido!");
+        } //continua
+
+```
+
+Para o próximo caso, temos 2 elementos na árvore e queremos inserir o terceiro.   
+Assim, temos 6 possibilidade de locais de inserção  
+Vamos tratar primeiro os casos de inserção onde já temos a raiz e um elemento à sua direita. Nela, o elemento pode
+estar contido em uma das três posições a seguir.  
+
+```java
+
+//dois elementos sendo raiz e direita
+        else if(raiz.esq == null){
+            if(x < raiz.elemento){
+                raiz.esq = new NoAN(x);
+            }
+
+            else if(x < raiz.dir.elemento){
+                raiz.esq = new NoAN(raiz.elemento);
+                raiz.elemento = x;
+            }
+
+            else {
+                raiz.esq = new NoAN(raiz.elemento);
+                raiz.elemento = raiz.dir.elemento; 
+                raiz.dir.elemento = x;
+            }
+
+            raiz.dir.cor = false;
+            raiz.esq.cor = false;
+        }
+
+```
+
+Agora, caso já tenhamos uma raiz e um elemento à sua esquerda, temos outros três casos
+de inserção, espelhados aos primeiros. 
+
+```java
+
+//dois elementos sendo raiz e esquerda
+        else if(raiz.dir == null){
+            if(x > raiz.elemento){
+                raiz.dir = new NoAN(x);
+            }
+
+            else if(x > raiz.esq.elemento){
+                raiz.dir = new NoAN(raiz.elemento);
+                raiz.elemento = x;
+            }
+
+            else {
+                raiz.dir = new NoAN(raiz.elemento);
+                raiz.elemento = raiz.esq.elemento;
+                raiz.esq.elemento = x;
+            }
+
+            raiz.dir.cor = false; //branco
+            raiz.esq.cor = false; //branco
+        }
+
+```
+
+Caso não tenha entrado em nenhuma das opções anteriores, significa que: 
+- Temos mais que 0, 1 ou 2 elementos
+- Podemos usar o inserir recursivo
+
+```java
+
+//se não entrou em nenhum dos anteriores, a árvore tem 3+ elementos
+        else {
+            System.out.println("Árvore com 3 ou mais elementos. Inserindo normalmente...");
+            inserir(x, null, null, null, raiz);
+        }
+
+        raiz.cor = false;
+    }
+
+```
+
+---
+
+## Função de inserir recursiva
+
 
 
 
