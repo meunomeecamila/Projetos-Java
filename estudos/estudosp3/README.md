@@ -407,6 +407,103 @@ else {
 
 ```
 
+Após os dois casos, conferimos as cores
+
+```java
+
+if (bisa == null) {
+                raiz = avo;
+            }
+            else if (avo.elemento < bisa.elemento) {
+                bisa.esq = avo;
+            }
+            else {
+                bisa.dir = avo;
+            }
+
+            avo.cor = false;
+
+            if (avo.esq != null) avo.esq.cor = true;
+            if (avo.dir != null) avo.dir.cor = true;
+        }
+    }
+
+```
+
+---
+
+## Rotações
+
+As quatro rotações servem para corrigir qualquer configuração estrutural inválida que surja durante a inserção — especialmente quando a árvore apresenta dois brancos consecutivos ou um alinhamento que viole as propriedades da AN — restaurando a forma canônica da árvore e garantindo balanceamento.  
+
+A seguir, vemos um pouco sobre elas: 
+
+
+### Rotação simples à esquerda  
+Acontece quando a árvore está totalmente manca para a direita  
+
+```java
+
+//Rotação simples à esquerda 
+NoAN rotacaoEsq(NoAN i){
+    NoAN j = i.dir;
+    NoAN k = j.esq;
+
+    j.esq = i;
+    i.dir = k;
+
+    return j;
+}
+
+```
+
+### Rotação dupla Dir-Esq  
+Acontece quando a árvore está manca para a direita e depois para a esquerda
+
+```java
+
+//Rotação dupla Direita-Esquerda(>)
+NoAN rotacaoDirEsq(NoAN i){
+    i.dir = rotacaoDir(i.dir);
+    return rotacaoEsq(i);
+}
+
+```
+
+### Rotação simples à direita
+Acontece quando a árvore está totalmente manca para a esquerda 
+
+```java
+
+//Rotação simples à direita
+NoAN rotacaoDir(NoAN i){
+    NoAN j = i.esq;
+    NoAN k = j.dir;
+
+    j.dir = i;
+    i.esq = k;
+
+    return j;
+}
+
+```
+
+### Rotação dupla Esq-Dir  
+Acontece quando a árvore está manca para a esquerda e depois para a direita
+
+```java
+
+//Rotação dupla Esquerda-Direita(<)
+NoAN rotacaoEsqDir(NoAN i){
+    i.esq = rotacaoEsq(i.esq);
+    return rotacaoDir(i);
+}
+
+```
+
+
+
+
 
 
 
