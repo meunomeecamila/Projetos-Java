@@ -764,6 +764,125 @@ public class Alvinegra(){
 
 }
 
+//! Tabelas hash
+/* Tabelas hash são vetores enormes que contém itens dispostos em um array de acordo com 
+uma fórmula definida. Essa fórmula varia para cada projeto, e é chamada de função de 
+mapeamento. */
+
+//* Vantagens: pesquisa é theta de 1, fácil de implementar
+//! Desvantagens: não tem ordem crescente ou decrescente
+
+/* As tabelas hash tem um probleminha chamado COLISÕES. Elas acontecem quando a função
+de mapeamento de dois itens os levam para o mesmo lugar no vetor. Para resolver ou 
+tratar essas colisões, temos vários códigos diferentes. */
+
+//? Hash com área de reserva
+// Espaço reserva no vetor. É para onde as colisões vão. 
+//! Caso esse espaço lote, o elemento não é inserido
+
+/*No caso a seguir, vamos supor que a função de mapeamento é posicao = num % tam. 
+Caso tenha algum igual, vai para a área de reserva. */
+
+public class HashAreaReserva {
+    public int []tabela; //tabela hash (vetor)
+    public int tam1; //tamanho da área normal
+    public int tam2; //tamanho da área de reserva
+    public int tamtotal; //tamanho total do vetor
+    public int reserva; //quantidade de itens na área de reserva
+    final int NULO = -1; //definição de nulo
+
+    //construtor
+    public HashAreaReserva(int tam1, int tam2){
+        this.tam1 = tam1;
+        this.tam2 = tam2;
+        this.tamtotal = tam1 + tam2;
+        this.tabela = new int[tamtotal];
+        this.reserva = 0;
+
+        //atribuir nulo a todos os itens do vetor
+        for(int i=0; i<tamtotal; i++){
+            tabela[i] = NULO;
+        }
+    }
+
+    //função de mapeamento
+    public int h(int x){
+        return x % tam1; 
+    }
+
+    //função de inserir
+    //é um booleano pois indica se a inserção foi de sucesso
+    public boolean inserir(int x){
+        int pos = h(x);
+
+        //confere existencia do elemento
+        if (pesquisar(x)) {
+            System.out.println("Erro: elemento já existe");
+            return false;
+        }
+
+        if (x == NULO) return false;
+
+        //se for possivel
+        else if(tabela[pos] == NULO){
+            tabela[pos] = x;
+            System.out.println("Inserido na área normal");
+            return true;
+        }
+
+        else if(reserva < tam2){
+            //ainda cabe na reserva
+            tabela[tam1 + reserva] = x;
+            System.out.println("Inserido na área de reserva");
+            reserva++;
+            return true;
+        }
+
+        else {
+            System.out.println("Erro: área normal e reserva lotadas");
+            return false;
+        }
+    }
+
+    public boolean pesquisar(int x){
+        int pos = h(x);
+
+        //conferir na área normal
+        if(tabela[pos] == x){
+            System.out.println("Encontrado na área normal");
+            return true;
+        }
+
+        //conferir na área de reserva
+        else if(tabela[pos] != NULO){
+            for(int i=0; i<reserva; i++){
+                if(tabela[tam1 + i] == x){
+                    System.out.println("Encontrado na área reserva");
+                    return true;
+                }
+            }
+        }
+
+        System.out.println("Elemento não encontrado");
+        return false;
+    }
+
+    //O mostrar a seguir apenas mostra índices diferentes de nulo
+    public void mostrar(){
+        System.out.println("Área normal");
+        for(int i=0; i<tam1; i++){
+            if(tabela[i] != NULO) System.out.println(i + ": " + tabela[i]);
+        }
+
+        System.out.println("Área reserva");
+        for(int i=0; i<reserva; i++){
+            System.out.println(i + ": " + tabela[tam1 + i]);
+        }
+    }
+}
+
+
+
 
 
 
