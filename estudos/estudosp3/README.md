@@ -253,6 +253,83 @@ Caso não tenha entrado em nenhuma das opções anteriores, significa que:
 ---
 
 ## Função de inserir recursiva
+### Inserir os demais elementos
+A função de inserir recursiva caminha com 4 ponteiros (bisavô, avô, pai e atual), 
+para que seja possível identificar, no momento exato da descida, qualquer violação das regras da árvore e aplicar a rotação correta no nó certo sem precisar voltar a recursão.  
+
+Nessa função, temos dois casos.  
+Caso 1: i chegou em *null*
+
+Como o i é *null*, fazemos a conferência da inserção no seu pai, para sabermos se a 
+inserção acontecerá na esquerda ou na direita. 
+*Obs:*    
+1. Após a inserção, é importante conferir a cor do pai. Caso ela seja preta, 
+chamamos a função de balancear, que veremos abaixo. 
+2. Nesse caso, não precisamos conferir se o elemento é igual, pois isso já foi
+confirmado no if tradicional. 
+
+```java
+//função recursiva de inserir elemento com 4 ponteiros
+    private void inserir(int x, NoAN bisa, NoAN avo, NoAN pai, NoAN i){
+        if(i == null){
+            if(x < pai.elemento){
+                pai.esq = new NoAN(x);
+                i = pai.esq;
+            }
+            else{
+                pai.dir = new NoAN(x);
+                i = pai.dir;
+            }
+
+            if(pai.cor == true){
+                balancear(bisa, avo, pai, i);
+            }
+        }
+
+```
+
+Caso 2: i ainda não é *null*
+
+Nesse caso, estamos apenas percorrendo elementos da árvore. Ao percorrer, utilizamos
+a *lógica de fragmentação na descida da 234*, e por isso, conferimos sempre se o nó
+é do tipo 4.  
+Se for, trocamos as cores e conferimos seu pai, como é mostrado abaixo: 
+
+```java
+
+        else {
+            if(isNo4(i) == true){
+                i.cor = true;
+                i.esq.cor = false;
+                i.dir.cor = false;
+
+                if(pai != null && pai.cor == true){
+                    balancear(bisa, avo, pai, i);
+                }
+            }
+
+```
+
+O código para conferir se é um nó do tipo 4 será mostrado no próximo capítulo. 
+
+
+Após essa conferência, caminhamos tradicionalmente.
+
+```java
+        if(x < i.elemento) inserir(x, avo, pai, i, i.esq);
+            else if(x > i.elemento) inserir(x, avo, pai, i, i.dir);
+            else System.out.println("erro");
+        }
+    }
+
+```
+
+---
+
+## Função de conferir se um nó é do tipo 4
+
+
+
 
 
 
