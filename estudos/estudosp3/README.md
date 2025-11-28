@@ -12,7 +12,7 @@ Uma árvore alvinegra está desbalanceada quando temos dois elementos pretos seg
 - Elementos brancos: não gêmeos
 
 Dois pretos seguidos significa uma tendência na inserção e que o grupo de gêmeos estourou  
-*obs:* A raiz sempre é branca  
+**obs:** A raiz sempre é branca  
 Os gêmeos podem ser representados tanto pela coloração de suas arestas quanto pela de seus nós.  
 
 ## Funções contidas no arquivo:
@@ -37,13 +37,14 @@ O arquivo contém explicações em forma de texto e comentários, assim como ima
 visualizar os nós e estruturas em cada trecho.  
 
 ### Dica extra
-Recomenda-se baixar a extensão *Better Comments* caso for analisar o código.
+Recomenda-se baixar a extensão **Better Comments** caso for analisar o código.  
+Ela colore os comentários, facilitando a compreensão
 
 ---
 
 # Nó da Alvinegra
 O nó da AN funciona como os outros, porém tem um bit de cor adicionado.  
-No seu construtor, o bit sempre começa com *true* (preto), considerando assim os novos
+No seu construtor, o bit sempre começa com **true** (preto), considerando assim os novos
 nós adicionados são gêmeos do pai
 
 ```java
@@ -258,11 +259,11 @@ A função de inserir recursiva caminha com 4 ponteiros (bisavô, avô, pai e at
 para que seja possível identificar, no momento exato da descida, qualquer violação das regras da árvore e aplicar a rotação correta no nó certo sem precisar voltar a recursão.  
 
 Nessa função, temos dois casos.  
-Caso 1: i chegou em *null*
+Caso 1: i chegou em **null**
 
-Como o i é *null*, fazemos a conferência da inserção no seu pai, para sabermos se a 
+Como o i é **null**, fazemos a conferência da inserção no seu pai, para sabermos se a 
 inserção acontecerá na esquerda ou na direita. 
-*Obs:*    
+**Obs:**    
 1. Após a inserção, é importante conferir a cor do pai. Caso ela seja preta, 
 chamamos a função de balancear, que veremos abaixo. 
 2. Nesse caso, não precisamos conferir se o elemento é igual, pois isso já foi
@@ -288,10 +289,10 @@ confirmado no if tradicional.
 
 ```
 
-Caso 2: i ainda não é *null*
+Caso 2: i ainda não é **null**
 
 Nesse caso, estamos apenas percorrendo elementos da árvore. Ao percorrer, utilizamos
-a *lógica de fragmentação na descida da 234*, e por isso, conferimos sempre se o nó
+a **lógica de fragmentação na descida da 234**, e por isso, conferimos sempre se o nó
 é do tipo 4.  
 Se for, trocamos as cores e conferimos seu pai, como é mostrado abaixo: 
 
@@ -327,6 +328,30 @@ Após essa conferência, caminhamos tradicionalmente.
 ---
 
 ## Função de conferir se um nó é do tipo 4
+As árvores 234 e AN tem considerações diferentes para nós do tipo 4. Veja a seguir:   
+**Para a 234**  
+Um nó é considerado do tipo 4 quando ele já possui três elementos armazenados internamente (por exemplo: [a | b | c]) e, por isso, está “cheio”, exigindo divisão caso um novo elemento precise ser inserido.    
+**Para a AN**  
+Na AN, um nó é do tipo 4 se ele for branco e seus dois filhos forem pretos, indicando que 
+são gêmeos do pai e logo, se formos adicionar mais um nó, não haveria espaço e exigiria
+uma fragmentação. 
+
+Nas árvores alvinegras, essa conferência é feita assim: 
+
+```java
+
+//função que verifica se um nó é do tipo 4
+public boolean isNo4(NoAN i){
+    if(i.esq != null && i.dir != null && i.esq.cor == true && i.dir.cor == true){
+        return true;
+    }
+    else return false;
+}
+
+```
+
+---
+
 
 
 
