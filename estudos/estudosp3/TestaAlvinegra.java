@@ -255,49 +255,6 @@ class Alvinegra {
         return rotacaoDir(i);
     }
 
-    //função de balancear para o caso comentado no inserir com 0,1 ou 2 elementos
-    private void balancearRaiz() {
-        if (raiz.esq == null && raiz.dir != null) {
-
-            if (raiz.dir.dir != null) {
-                raiz = rotacaoEsq(raiz);
-            }
-
-            else if (raiz.dir.esq != null) {
-                raiz = rotacaoDirEsq(raiz);
-            }
-
-            raiz.cor = false;
-            raiz.esq.cor = true;
-            raiz.dir.cor = true;
-
-            return;
-        }
-
-        if (raiz.dir == null && raiz.esq != null) {
-
-            if (raiz.esq.esq != null) {
-                raiz = rotacaoDir(raiz);
-            }
-
-            else if (raiz.esq.dir != null) {
-                raiz = rotacaoEsqDir(raiz);
-            }
-
-            raiz.cor = false;
-            raiz.esq.cor = true;
-            raiz.dir.cor = true;
-
-            return;
-        }
-
-        if (raiz.esq != null && raiz.dir != null) {
-            raiz.cor = false;
-            raiz.esq.cor = true;
-            raiz.dir.cor = true;
-        }
-    }
-
 }
 
 //Main com menu interativo

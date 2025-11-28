@@ -1,10 +1,14 @@
-# Árvore Alvinegra 
+# 🌳 Árvore Alvinegra 
 Árvore criada para resolver problemas da 234 e facilitar a sua compreensão.  
 Os nós podem ter duas cores (true or false), que serão um booleano. O nosso professor, 
 Max, utiliza preto e branco para facilitar a compreensão. Mas a árvore realmente
 conhecida é a Rubronegra (vermelho e preto).   
 
-## Observações:
+> ⚠️ Observação importante  
+> Na AN utilizada nesta disciplina, **preto = vermelho da Rubro-Negra**  
+> e **branco = preto da Rubro-Negra**.  
+
+## ✏️ Observações:
 O bit de cor da alvinegra não interfere em nada, apenas serve para facilitar o balanceamento
 Uma árvore alvinegra está desbalanceada quando temos dois elementos pretos seguidos  
 
@@ -15,7 +19,7 @@ Dois pretos seguidos significa uma tendência na inserção e que o grupo de gê
 **obs:** A raiz sempre é branca  
 Os gêmeos podem ser representados tanto pela coloração de suas arestas quanto pela de seus nós.  
 
-## Funções contidas no arquivo:
+## 🔧 Funções contidas no arquivo:
 - Caminhar central
 - Caminhar pré
 - Caminhar pós
@@ -24,25 +28,25 @@ Os gêmeos podem ser representados tanto pela coloração de suas arestas quanto
 - Pesquisar
 - Funções de balanceamento
 
-## Como executar ou testar o código?
+## 🛠️ Como executar ou testar o código?
 1. Clone o repositório
 2. Compile o arquivo com javac TestaAlvinegra.java
 3. Execute o arquivo com java TestaAlvinegra
 4. Utilize o menu na main para poder executar as funções
 
-## Resumo e explicações
+## ✏️ Resumo e explicações
 A seguir, você encontrará o código da Alvinegra modularizado e otimizado, para facilitar 
 a leitura e interpretação.  
 O arquivo contém explicações em forma de texto e comentários, assim como imagens para 
 visualizar os nós e estruturas em cada trecho.  
 
-### Dica extra
+### 🚧 Dica extra
 Recomenda-se baixar a extensão **Better Comments** caso for analisar o código.  
 Ela colore os comentários, facilitando a compreensão
 
 ---
 
-# Nó da Alvinegra
+# 🧠 Nó da Alvinegra
 O nó da AN funciona como os outros, porém tem um bit de cor adicionado.  
 No seu construtor, o bit sempre começa com **true** (preto), considerando assim os novos
 nós adicionados são gêmeos do pai
@@ -65,7 +69,7 @@ class NoAN {
 ```
 ---
 
-# Árvore Alvinegra
+# 🌳 Árvore Alvinegra
 A classe da Árvore Alvinegra começa apenas com a sua raiz, que é nula inicialmente.
 
 ```java
@@ -81,7 +85,7 @@ class Alvinegra {
 ```
 
 A partir de agora, veremos as funções que podem estar contidas na sua classe  
-## Funções de caminhar
+## 🚶‍➡️ Funções de caminhar
 Os "caminhar" são utilizados para percorrer a árvore, e permanecem os mesmos das outras
 árvores estudadas. São eles: 
 
@@ -123,7 +127,7 @@ public void caminharpos(NoAN i){
 
 ---
 
-## Pesquisa
+## 🔍 Pesquisa
 Retorna true se o elemento estiver na árvore e false se não estiver
 
 ```java
@@ -142,7 +146,7 @@ public boolean pesquisar(int x, NoAN i){
 
 ---
 
-## Função de inserir iterativa
+## ➕ Função de inserir iterativa
 ### Inserir os 3 primeiros elementos
 Nessa função, implementamos os 3 primeiros nós de forma manual, porque a lógica recursiva do inserir só funciona quando você já tem pelo menos uma subárvore inteira para percorrer.  
 Se não for um desses casos, chamamos o inserir recursivo normal. 
@@ -253,7 +257,7 @@ Caso não tenha entrado em nenhuma das opções anteriores, significa que:
 
 ---
 
-## Função de inserir recursiva
+## ➕ Função de inserir recursiva
 ### Inserir os demais elementos
 A função de inserir recursiva caminha com 4 ponteiros (bisavô, avô, pai e atual), 
 para que seja possível identificar, no momento exato da descida, qualquer violação das regras da árvore e aplicar a rotação correta no nó certo sem precisar voltar a recursão.  
@@ -327,7 +331,7 @@ Após essa conferência, caminhamos tradicionalmente.
 
 ---
 
-## Função de conferir se um nó é do tipo 4
+## ⚡ Função de conferir se um nó é do tipo 4
 As árvores 234 e AN tem considerações diferentes para nós do tipo 4. Veja a seguir:  
 
 **Para a 234**  
@@ -353,7 +357,7 @@ public boolean isNo4(NoAN i){
 
 ---
 
-## Função de balancear
+## ⚖️ Função de balancear
 
 A função de balancear apenas acontecerá se a cor do pai for **true**.  
 Assim, temos dois casos:    
@@ -432,7 +436,7 @@ if (bisa == null) {
 
 ---
 
-## Rotações
+## 🔄 Rotações
 
 As quatro rotações servem para corrigir qualquer configuração estrutural inválida que surja durante a inserção — especialmente quando a árvore apresenta dois brancos consecutivos ou um alinhamento que viole as propriedades da AN — restaurando a forma canônica da árvore e garantindo balanceamento.  
 
@@ -500,6 +504,19 @@ NoAN rotacaoEsqDir(NoAN i){
 }
 
 ```
+
+---
+
+## 📦 Conclusão
+A Árvore Alvinegra (AN) é uma árvore de busca balanceada que representa a lógica das árvores **2-3-4** usando apenas **cores nas arestas** (preto = normal, branco = promoção).  
+Os **três primeiros nós** são tratados manualmente, pois ainda não existe estrutura suficiente para aplicar a inserção recursiva sem criar exceções.
+
+A partir do quarto elemento, a inserção usa quatro ponteiros **(bisavô, avô, pai e atual)** para identificar violações durante a descida e corrigir no instante certo.  
+Um nó é considerado **tipo 4** quando o **pai é branco e seus dois filhos são pretos**, correspondendo a um 4-nó que deve ser dividido por recoloração.
+
+Se surgir um tipo 4 ou duas brancas consecutivas, a árvore é ajustada com uma das **quatro rotações** (simples ou duplas), restaurando a estrutura correta.  
+Com essas regras, a AN mantém as operações sempre em **O(log n)** e evita desbalanceamentos.
+
 
 
 
