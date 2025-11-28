@@ -328,7 +328,8 @@ Após essa conferência, caminhamos tradicionalmente.
 ---
 
 ## Função de conferir se um nó é do tipo 4
-As árvores 234 e AN tem considerações diferentes para nós do tipo 4. Veja a seguir:   
+As árvores 234 e AN tem considerações diferentes para nós do tipo 4. Veja a seguir:  
+
 **Para a 234**  
 Um nó é considerado do tipo 4 quando ele já possui três elementos armazenados internamente (por exemplo: [a | b | c]) e, por isso, está “cheio”, exigindo divisão caso um novo elemento precise ser inserido.    
 **Para a AN**  
@@ -351,6 +352,8 @@ public boolean isNo4(NoAN i){
 ```
 
 ---
+
+## Função de balancear
 
 
 
