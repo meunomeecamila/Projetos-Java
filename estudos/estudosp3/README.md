@@ -19,6 +19,8 @@ Dois pretos seguidos significa uma tendência na inserção e que o grupo de gê
 **obs:** A raiz sempre é branca  
 Os gêmeos podem ser representados tanto pela coloração de suas arestas quanto pela de seus nós.  
 
+![introducao](image.png)
+
 ## 🔧 Funções contidas no arquivo:
 - Caminhar central
 - Caminhar pré
@@ -153,7 +155,7 @@ Se não for um desses casos, chamamos o inserir recursivo normal.
 
 No *bloco abaixo*, tratamos dois casos. 
 - Caso 1: 0 elementos -> apenas insere na raiz
-- Caso 2: 1 elemento -> insere na direita ou na esquerda da raiz
+- Caso 2: 1 elemento -> insere na direita ou na esquerda da raiz  
 Esses dois primeiros casos acontecem normalmente
 
 ```java
