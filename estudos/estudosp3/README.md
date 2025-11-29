@@ -19,7 +19,7 @@ Dois pretos seguidos significa uma tendência na inserção e que o grupo de gê
 **obs:** A raiz sempre é branca  
 Os gêmeos podem ser representados tanto pela coloração de suas arestas quanto pela de seus nós.  
 
-<img src="image.png" width="400">
+<img src="image.png" width="700">
 
 ## 🔧 Funções contidas no arquivo:
 - Caminhar central
