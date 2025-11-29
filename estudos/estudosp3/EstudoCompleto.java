@@ -893,7 +893,7 @@ public class HashReHash{
     public HashReHash(int tam){
         this.tam = tam;
         this.tabela = new int[tam];
-        
+
         for(int i=0; i<tam; i++){
             tabela[i] = NULO;
         }
@@ -946,6 +946,82 @@ public class HashReHash{
     public void mostrar(){
         for(int i=0; i<tam; i++){
             System.out.println("Índice: " + (i+1) + " | Elemento: " + tabela[i]);
+        }
+    }
+}
+
+//? Hash indireta com lista flexível simples
+// Cada posição da tabela hash possui ponteiro para uma lista flexível 
+// Caso a posição esteja ocupada, adiciona na lista
+//! Desvantagens: pior caso é O(n), tendo que olhar uma lista inteira
+
+public class Celula {
+    int elemento;
+    Celula prox;
+
+    public Celula(int x){
+        this.elemento = x;
+        this.prox = null;
+    }
+}
+
+public class HashComLista{
+    public Celula []tabela;
+    public int tam; 
+    final int NULO = -1;
+
+    //construtor inicia tanto tabela quanto lista
+    public HashComLista(int tam){
+        this.tam = tam;
+        this.tabela = new Celula[tam];
+
+        for(int i=0; i<tam; i++){
+            tabela[i] = new Celula(-1);
+        }
+    }
+
+    public int h(int x){
+        return x % tam;
+    }
+
+    public void inserir(int x){
+        int pos = h(x);
+        Celula cabeca = tabela[pos];
+        
+        if(cabeca.prox == null){
+            //nenhum elemento
+            cabeca.prox = new Celula(x);
+            return;
+        }
+
+        //se a lista tiver elementos, percorrer
+        Celula j = cabeca.prox;
+        while(j.prox != null) j = j.prox;
+        j.prox = new Celula(x);
+        j = null;
+        return;
+    }
+
+    public boolean pesquisar(int x){
+        int pos = h(x);
+        Celula j = tabela[pos].prox; //cabeca.prox
+
+        while(j != null){
+            if(j.elemento == x) return true;
+            j = j.prox;
+        }
+
+        return false;
+    }
+
+    public void mostrar(){
+        for(int i=0; i<tam; i++){
+            Celula j = tabela[i].prox; //cabeca.prox
+
+            while(j != null) {
+                System.out.println(j.elemento); 
+                j = j.prox;
+            }
         }
     }
 }
