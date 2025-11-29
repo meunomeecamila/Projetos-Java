@@ -881,6 +881,75 @@ public class HashAreaReserva {
     }
 }
 
+//? Hash com rehash
+// Segunda função que é executada caso a primeira não consiga inserir
+// Podemos ter vários rehashs, mas caso ela não consiga inserir, acabou
+
+public class HashReHash{
+    public int []tabela; //nossa tabela
+    public int tam; //tamanho da tabela
+    final int NULO = -1; //definição do nulo
+
+    public HashReHash(int tam){
+        this.tam = tam;
+        this.tabela = new int[tam];
+        
+        for(int i=0; i<tam; i++){
+            tabela[i] = NULO;
+        }
+    }
+
+    public int h(int x){
+        return x % tam;
+    }
+
+    //nesse caso, a função de rehash coloca o valor na casa seguinte
+    public int reh(int x){
+        return (x+1) % tam;
+    }
+
+    public boolean inserir(int x){
+        int pos = h(x);
+        
+        //tentar inserir na tabela
+        if(tabela[pos] == NULO){
+            tabela[pos] = x;
+            System.out.println("Elemento inserido normalmente");
+            return true;
+        }
+
+        else {
+            //tabela pos tem elemento
+            pos = reh(x);
+            if(tabela[pos] == NULO){
+                tabela[pos] = x;
+                System.out.println("Elemento inserido com rehash");
+                return true;
+            }
+
+            else {
+                System.out.println("Não foi possível inserir o elemento");
+                return false;
+            }
+        }
+    }
+
+    public boolean pesquisar(int x){
+        int pos = h(x);
+        if(tabela[pos] == x) return true;
+
+        pos = reh(x);
+        if(tabela[pos] == x) return true;
+        else return false;
+    }
+
+    public void mostrar(){
+        for(int i=0; i<tam; i++){
+            System.out.println("Índice: " + (i+1) + " | Elemento: " + tabela[i]);
+        }
+    }
+}
+
 
 
 
