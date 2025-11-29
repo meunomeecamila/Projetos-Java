@@ -8,7 +8,7 @@ e matérias adjacentes de finalização da disciplina de AED2 */
 - Balanceamento de árvores binárias (AVL) - ok
 - Árvores 234 - ok
 - Árvores bicolor (alvinegras) - ok
-- Tabela hash
+- Tabela hash - ok
  */
 
 //! Árvores binárias de busca
