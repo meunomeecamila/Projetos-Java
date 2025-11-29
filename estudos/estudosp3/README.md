@@ -91,6 +91,8 @@ A partir de agora, veremos as funções que podem estar contidas na sua classe
 Os "caminhar" são utilizados para percorrer a árvore, e permanecem os mesmos das outras
 árvores estudadas. São eles: 
 
+<img src="image-1.png" width="700">
+
 ### Caminhar central
 Lista todos os elementos em ordem crescente
 
@@ -158,6 +160,8 @@ No *bloco abaixo*, tratamos dois casos.
 - Caso 2: 1 elemento -> insere na direita ou na esquerda da raiz  
 Esses dois primeiros casos acontecem normalmente
 
+<img src="image-2.png" width="700">
+
 ```java
 
 public void inserir(int x){
@@ -185,7 +189,9 @@ public void inserir(int x){
 Para o próximo caso, temos 2 elementos na árvore e queremos inserir o terceiro.   
 Assim, temos 6 possibilidade de locais de inserção  
 Vamos tratar primeiro os casos de inserção onde já temos a raiz e um elemento à sua direita. Nela, o elemento pode
-estar contido em uma das três posições a seguir.  
+estar contido em uma das três posições a seguir. 
+
+<img src="image-3.png" width="700">
 
 ```java
 
@@ -214,6 +220,8 @@ estar contido em uma das três posições a seguir.
 
 Agora, caso já tenhamos uma raiz e um elemento à sua esquerda, temos outros três casos
 de inserção, espelhados aos primeiros. 
+
+<img src="image-4.png" width="700">
 
 ```java
 
@@ -343,6 +351,8 @@ Na AN, um nó é do tipo 4 se ele for branco e seus dois filhos forem pretos, in
 são gêmeos do pai e logo, se formos adicionar mais um nó, não haveria espaço e exigiria
 uma fragmentação. 
 
+<img src="image-5.png" width="700">
+
 Nas árvores alvinegras, essa conferência é feita assim: 
 
 ```java
@@ -370,6 +380,8 @@ acontecerá na **esquerda**.
 Se o elemento atual for maior que o pai, a rotação é **Simples à esquerda** (ex 1).   
 Se o elemento atual for menor que o pai, a rotação é **Dupla Dir-Esq** (ex 2).  
 
+<img src="image-6.png" width="700">
+
 ```java
 
 //função de balancear
@@ -395,6 +407,8 @@ Nesse caso, a árvore está manca para a **esquerda** e logo, a rotação mais i
 acontecerá na **direita**.    
 Se o elemento atual for menor que o pai, a rotação é **Simples à direita** (ex 3).   
 Se o elemento atual for maior que o pai, a rotação é **Dupla Esq-Dir** (ex 4).  
+
+<img src="image-7.png" width="700">
 
 ```java
 
@@ -441,6 +455,8 @@ if (bisa == null) {
 ## 🔄 Rotações
 
 As quatro rotações servem para corrigir qualquer configuração estrutural inválida que surja durante a inserção — especialmente quando a árvore apresenta dois brancos consecutivos ou um alinhamento que viole as propriedades da AN — restaurando a forma canônica da árvore e garantindo balanceamento.  
+
+<img src="image-8.png" width="700">
 
 A seguir, vemos um pouco sobre elas: 
 
