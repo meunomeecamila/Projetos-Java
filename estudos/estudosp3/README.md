@@ -351,7 +351,7 @@ Na AN, um nó é do tipo 4 se ele for branco e seus dois filhos forem pretos, in
 são gêmeos do pai e logo, se formos adicionar mais um nó, não haveria espaço e exigiria
 uma fragmentação. 
 
-<img src="image-5.png" width="500">
+<img src="image-5.png" width="400">
 
 Nas árvores alvinegras, essa conferência é feita assim: 
 
@@ -380,7 +380,7 @@ acontecerá na **esquerda**.
 Se o elemento atual for maior que o pai, a rotação é **Simples à esquerda** (ex 1).   
 Se o elemento atual for menor que o pai, a rotação é **Dupla Dir-Esq** (ex 2).  
 
-<img src="image-6.png" width="600">
+<img src="image-6.png" width="500">
 
 ```java
 
@@ -408,7 +408,7 @@ acontecerá na **direita**.
 Se o elemento atual for menor que o pai, a rotação é **Simples à direita** (ex 3).   
 Se o elemento atual for maior que o pai, a rotação é **Dupla Esq-Dir** (ex 4).  
 
-<img src="image-7.png" width="600">
+<img src="image-7.png" width="500">
 
 ```java
 
