@@ -160,7 +160,7 @@ No *bloco abaixo*, tratamos dois casos.
 - Caso 2: 1 elemento -> insere na direita ou na esquerda da raiz  
 Esses dois primeiros casos acontecem normalmente
 
-<img src="image-2.png" width="700">
+<img src="image-2.png" width="400">
 
 ```java
 
@@ -191,7 +191,7 @@ Assim, temos 6 possibilidade de locais de inserção
 Vamos tratar primeiro os casos de inserção onde já temos a raiz e um elemento à sua direita. Nela, o elemento pode
 estar contido em uma das três posições a seguir. 
 
-<img src="image-3.png" width="700">
+<img src="image-3.png" width="500">
 
 ```java
 
@@ -221,7 +221,7 @@ estar contido em uma das três posições a seguir.
 Agora, caso já tenhamos uma raiz e um elemento à sua esquerda, temos outros três casos
 de inserção, espelhados aos primeiros. 
 
-<img src="image-4.png" width="700">
+<img src="image-4.png" width="500">
 
 ```java
 
@@ -351,7 +351,7 @@ Na AN, um nó é do tipo 4 se ele for branco e seus dois filhos forem pretos, in
 são gêmeos do pai e logo, se formos adicionar mais um nó, não haveria espaço e exigiria
 uma fragmentação. 
 
-<img src="image-5.png" width="700">
+<img src="image-5.png" width="500">
 
 Nas árvores alvinegras, essa conferência é feita assim: 
 
@@ -380,7 +380,7 @@ acontecerá na **esquerda**.
 Se o elemento atual for maior que o pai, a rotação é **Simples à esquerda** (ex 1).   
 Se o elemento atual for menor que o pai, a rotação é **Dupla Dir-Esq** (ex 2).  
 
-<img src="image-6.png" width="700">
+<img src="image-6.png" width="600">
 
 ```java
 
@@ -408,7 +408,7 @@ acontecerá na **direita**.
 Se o elemento atual for menor que o pai, a rotação é **Simples à direita** (ex 3).   
 Se o elemento atual for maior que o pai, a rotação é **Dupla Esq-Dir** (ex 4).  
 
-<img src="image-7.png" width="700">
+<img src="image-7.png" width="600">
 
 ```java
 
