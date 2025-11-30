@@ -46,6 +46,13 @@ public class T1 {
             return true;
         }
     }
+
+    //buscar
+    public boolean buscar(int x){
+        int pos = h(x);
+        if(tabela[pos] == x) return true;
+        else return t2.buscar(x);
+    }
 }
 
 public class T2 {
@@ -73,6 +80,13 @@ public class T2 {
         }
 
         else a.inserir(x);
+    }
+
+    public boolean buscar(int x){
+        int pos = x % 3;
+        if(pos == 0) return t3.buscar(x);
+        else if(pos == 1) return l.buscar(x);
+        else return a.buscar(x);
     }
 }
 
@@ -122,6 +136,19 @@ public class T3 {
             arv.inserir(x);
         }
     }
+
+    public boolean buscar(int x){
+        //tentar com hash
+        int pos = h(x);
+        if(tabela[pos] == x) return true;
+
+        //tentar com rehash
+        pos = reh(pos);
+        if(tabela[pos] == x) return true;
+
+        //buscar na arvore
+        else return arv.buscar(x);
+    }
 }
 
 //nó da árvore
@@ -158,6 +185,17 @@ public class Arvore {
         
         return i;
     }
+
+    public boolean buscar(int x){
+        return buscar(x, raiz);
+    }
+
+    private boolean buscar(int x, No i){
+        if(i == null) return false;
+        else if(x < i.elemento) return buscar(x, i.esq);
+        else if(x > i.elemento) return buscar(x, i.dir);
+        else return true;
+    }
 }
 
 //célula da lista
@@ -186,5 +224,15 @@ public class Lista{
     public void inserir(int x){
         ultimo.prox = new Celula(x);
         ultimo = ultimo.prox;
+    }
+
+    public boolean buscar(int x){
+        return buscar(x, primeiro.prox);
+    }
+
+    private boolean buscar(int x, Celula i){
+        if(i == null) return false;
+        else if(i.elemento == x) return true;
+        else return buscar(x, i.prox);
     }
 }
