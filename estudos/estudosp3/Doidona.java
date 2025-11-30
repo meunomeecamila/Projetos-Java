@@ -49,7 +49,7 @@ public class T1 {
 }
 
 public class T2 {
-    public int tam;
+    //public int tam;
 
     private Lista l;
     private T3 t3;
@@ -73,5 +73,118 @@ public class T2 {
         }
 
         else a.inserir(x);
+    }
+}
+
+public class T3 {
+    public int tam; 
+    public int[] tabela;
+    final int NULO = -1;
+    public Arvore arv;
+
+    //construtor
+    public T3(int tam){
+        this.tam = tam;
+        this.arv = new Arvore();
+        this.tabela = new int[tam];
+        
+        for(int i=0; i<tam; i++){
+            tabela[i] = NULO;
+        }
+    }
+
+    //função de mapeamento
+    public int h(int x){
+        return x % tam;
+    }
+
+    public int reh(int x){
+        return (x+1) % tam;
+    }
+
+    //inserir
+    public void inserir(int x){
+        int pos = h(x);
+        if(tabela[pos] == NULO){
+            tabela[pos] = x;
+            return;
+        }
+
+        //testar com rehash
+        pos = reh(pos);
+        if(tabela[pos] == NULO){
+            tabela[pos] = x;
+            return;
+        }
+        
+        else {
+            //inserir na árvore
+            arv.inserir(x);
+        }
+    }
+}
+
+//nó da árvore
+public class No {
+    public int elemento;
+    public No esq;
+    public No dir;
+
+    //construtor
+    public No(int x){
+        this.elemento = x;
+        this.esq = null;
+        this.dir = null;
+    }
+}
+
+//árvore propriamente dita
+public class Arvore {
+    public No raiz;
+
+    //construtor
+    public Arvore(){
+        this.raiz = null;
+    }
+
+    public void inserir(int x){
+        raiz = inserir(x, raiz);
+    }
+
+    public No inserir(int x, No i){
+        if(i == null) i = new No(x);
+        else if(x < i.elemento) i.esq = inserir(x, i.esq);
+        else if(x > i.elemento) i.dir = inserir(x, i.dir);
+        
+        return i;
+    }
+}
+
+//célula da lista
+public class Celula{
+    public int elemento;
+    public Celula prox;
+
+    //construtor
+    public Celula(int x){
+        this.elemento = x;
+        this.prox = null;
+    }
+}
+
+//Lista propriamente dita
+public class Lista{
+    public Celula primeiro;
+    public Celula ultimo;
+
+    public Lista(){
+        this.primeiro = new Celula(-1); //celula cabeca
+        this.ultimo = primeiro;
+    }
+
+    //inserir
+    public void inserir(int x){
+        ultimo.prox = new Celula(x);
+        ultimo = ultimo.prox;
     }
 }
