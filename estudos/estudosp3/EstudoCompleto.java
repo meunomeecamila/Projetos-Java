@@ -19,17 +19,13 @@ Os filhos da sua esquerda são sempre menores e os da sua direita, maiores que o
 em cada nó é no máximo 1 ou -1. 
 Sua inserção, remoção e busca vai até no máximo lg n
 */
-
+public class EstudoCompleto {
 public class No {
     public No esq; 
     public No dir;
     public int elemento;
 
     //construtor
-    public No(){
-        this(0, null, null);
-    }
-
     public No(int x){
         this.elemento = x;
         this.esq = null;
@@ -1026,6 +1022,98 @@ public class HashComLista{
         }
     }
 }
+
+//! Árvores TRIE
+/* Uma árvore TRIE contém chars que formam palavras. Cada um dos seus nós
+pode possuir até 255 filhos, sendo estes os elementos da tabela ASCII. */
+
+//! Importante: 
+/* Na árvore atual, não aceitamos palavras que sejam prefixo de outras ou
+que comecem com prefixos de outras. Exemplo: Se incluirmos ANA, não podemos
+incluir ANALISAR. */
+
+public class NoTRIE{
+    public char elemento; //elemento do nó
+    public int tamanho = 255;
+    public NoTRIE[] prox; //vetor para todos os seus filhos
+    public boolean isFolha; //se é folha, é o fim de uma palavra
+
+    //construtor normal
+    public NoTRIE(char elemento){
+        this.elemento = elemento;
+        this.prox = new NoTRIE[tamanho]; //cria um vetor de nós
+
+        //iniciar todos como null
+        for(int i=0; i<tamanho; i++) prox[i] = null;
+        this.isFolha = false;
+    }
+
+    //construtor para a raiz
+    //raiz é sempre vazia
+    public NoTRIE(){
+        this(' ');
+    }
+}
+
+public class ArvoreTRIE {
+    private NoTRIE raiz; //raiz é sempre vazia
+
+    //construtor
+    public ArvoreTRIE(){
+        raiz = new NoTRIE();
+    }
+
+    //MÉTODOS NA ÁRVORE TRIE
+    //!Inserir
+    /* Inserimos apenas as coisas novas de uma palavra. Exemplo: SAPATO e SAPO.
+    Se tivermos SAPATO e quisermos inserir SAPO, vamos até o P de SAPATO e depois 
+    inserimos o O de sapo*/
+    public void inserir(String s){
+        inserir(s, raiz, 0);
+    }
+
+    private void inserir(String s, NoTRIE i, int cont){
+        char c = s.charAt(cont); //caractere atual
+
+        //se chegar em nulo, cria um filho
+        if(i.prox[c] == null){
+            //cria um filho
+            i.prox[c] = new NoTRIE(c);
+
+            //se é o último, vira folha
+            if(cont == s.length() - 1) {
+                i.prox[c].isFolha = true;
+            }
+
+            //se não, continua
+            else {
+                inserir(s, i.prox[c], cont+1);
+            }
+        }
+
+        //só continua inserindo se não for folha e se o cont ainda for menor que o tamanho da string
+        else if(i.prox[c].isFolha == false && cont < s.length() -1){
+            inserir(s, i.prox[c], cont+1);
+        }
+
+        else {
+            System.out.println("ERRO");
+            return;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
