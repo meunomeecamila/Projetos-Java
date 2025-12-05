@@ -1101,6 +1101,31 @@ public class ArvoreTRIE {
             return;
         }
     }
+
+    public boolean pesquisar(String s){
+        return pesquisar(s, raiz, 0);
+    }
+
+    private boolean pesquisar(String s, NoTRIE i, int cont){
+        char c = s.charAt(cont);
+        
+        //se for null, procurou e não achou
+        if(i.prox[c] == null) return false;
+
+        //se chegou no fim:
+        else if(cont == s.length() - 1){
+            //se a ultima for folha, retorna true
+            //se não, retorna false
+            return i.prox[c].isFolha;
+        }
+
+        //se não, continua procurando
+        else if(cont < s.length()-1){
+            return pesquisar(s, i.prox[c], cont+1);
+        }
+
+        else return false; //nunca será executado mas java exige q tenha um retorno em todos os caminhos
+    }
 }
 
 
