@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Ferias {
+public class Exemploprova3 {
 
     public static class Crianca {
         String nome;
@@ -38,7 +38,7 @@ public class Ferias {
         int i = 0; // começa pela primeira criança
 
         while (vivos > 1) {
-            int value = kids[i].value;
+            int value = kids[i].valor;
 
             // ímpar → next ; par → prev  (EXATAMENTE igual ao C)
             if (value % 2 == 1) {

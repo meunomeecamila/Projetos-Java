@@ -9,6 +9,7 @@ e matérias adjacentes de finalização da disciplina de AED2 */
 - Árvores 234 - ok
 - Árvores bicolor (alvinegras) - ok
 - Tabela hash - ok
+- Árvore TRIE
  */
 
 //! Árvores binárias de busca

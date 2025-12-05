@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Main {
+public class Exemploprova4 {
 
     // ---------------- CELULA ----------------
     static class Celula {

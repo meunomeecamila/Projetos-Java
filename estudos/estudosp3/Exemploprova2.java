@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Protocolo {
+public class Exemploprova2 {
 
     //função de comparar
     public static boolean compara(String a, String b){
