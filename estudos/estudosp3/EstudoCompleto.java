@@ -1126,6 +1126,26 @@ public class ArvoreTRIE {
 
         else return false; //nunca será executado mas java exige q tenha um retorno em todos os caminhos
     }
+
+    public void mostrar(){
+        mostrar("", raiz);
+    }
+
+    //você guarda o que veio dos seus pais
+    private void mostrar(String s, NoTRIE i){
+        if(i.isFolha){
+            System.out.println(s + i.elemento);
+        }
+        //enquanto não for folha, concatenar as strings
+        else {
+            for(int j=0; j<i.prox.length; j++){
+                if(i.prox[j] != null){
+                    //se tiver o filho, adicionar ele
+                    mostrar(s + i.elemento, i.prox[j]);
+                }
+            }
+        }
+    }
 }
 
 
