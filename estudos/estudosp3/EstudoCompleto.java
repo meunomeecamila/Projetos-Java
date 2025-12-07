@@ -357,6 +357,13 @@ public class AVL {
             i.elemento = maior.elemento;
             i.esq = remover(i.esq, maior.elemento);
         }
+
+        //etapa 2 -> atualizar altura
+        i.altura = 1 + Math.max(altura(i.esq), altura(i.dir)); 
+        //obs: sua altura será vc (1) + a altura dos seus filhos
+
+        //etapa 3 -> balancear caso necessário
+        return balancear(i);
     }
 }
 
@@ -384,7 +391,7 @@ um do tipo 4.*/
 //!Problema: há quebras proativas e talvez, desnecessárias
 //*Solução: evita cascatas 
 
-//TODO - observação: Nós não implementamos o código da AVL, pois usamos ela como
+//TODO - observação: Nós não implementamos o código da 234, pois usamos ela como
 //TODO - uma introdução para a alvinegra. 
 
 //As fragmentações e desenhos podem ser cobradas, então revisar isso!
@@ -1147,17 +1154,6 @@ public class ArvoreTRIE {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
