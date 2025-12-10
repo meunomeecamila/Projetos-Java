@@ -159,5 +159,70 @@ public class Exemploprova5 {
     Para ajudar, abaixo temos o inserir visto na sala de aula:
     */
 
+    /*
+    Lista flexível: Caso tenhamos um ponteiro para último ou caso a inserção seja
+    no início, a inserção será O(n) em cada caractere, pois é necessário percorrer 
+    a lista para checar se já temos um filho. Assim, para uma palavra completa, 
+    a complexidade é O(n x k), sendo n os itens da lista e k os caracteres.
+
+    Árvore binária: A inserção no melhor caso será O(1) por caractere, 
+    quando é raiz ou está a sua direita ou esquerda. 
+    Caso tenhamos que percorrer a árvore, o pior caso é O(lg n) por caractere, resultando
+    assim em O(lg n x k) por palavra. 
+
+    Hash: Nesse caso temos a hash perfeita, uma vez que cada item da tabela ASCII
+    ficará em uma posição da tabela e logo, todas as operações de busca, pesquisa, 
+    inserção e remoção serão O(1) por caractere, sendo assim O(k) por palavra.
+    */
+
+    //Classe nó considerando lista flexivel
+    public class NoTRIElista{
+        public char elemento;
+        public boolean isFolha;
+
+        public Celula primeiro;
+        public Celula ultimo;
+
+        //construtor
+        public NoTRIElista(char elemento){
+            this.elemento = elemento;
+            this.isFolha = false;
+
+            this.primeiro = new Celula(); //célula cabeça
+            this.ultimo = primeiro;
+        }
+    }
+
+    //Inserir com lista flexível
+    public void inserir(String s){
+        inserir(s, this.raiz, 0)
+    }
+
+    private void inserir(String s, No i, int cont){
+        char c = s.charAt(cont);
+        int tam = getTam(i.primeiro.prox); //percorre a lista pra pegar o tamanho
+
+        //percorrer toda a lista
+        boolean achou = false;
+        Celula k = i.primeiro;
+
+        for(int i=0; i<tam; i++){
+            if(k.prox != null && k.prox.elemento == c){
+                achou = true;
+                break;
+            }
+
+            k = k.prox;
+        }
+    }
+
+    //função dentro da lista
+    private int getTam(Celula j){
+        Celula k;
+        int tam = 0;
+        for(k = j; k != null; k = k.prox) tam++;
+        return tam;
+    }
+
 
 }
