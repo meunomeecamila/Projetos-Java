@@ -20,7 +20,8 @@ public class Principal {
         try {
             ArquivoPessoa arqPessoas = new ArquivoPessoa("pessoa");
             
-            
+            //criação de novas pessoas com id
+            //! importante: usuário NÃO DEVE interagir com id, é do sistema
             int id1 = arqPessoas.create(p1);
             int id2 = arqPessoas.create(p2);
             int id3 = arqPessoas.create(p3);
