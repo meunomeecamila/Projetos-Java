@@ -7,7 +7,7 @@
 #include <string.h>
 
 // -----------------------------------------
-// 1. Dobro de um número
+// Dobro de um número
 // -----------------------------------------
 int dobro(int x) {
 return x * 2;
@@ -15,7 +15,7 @@ return x * 2;
 
 
 // -----------------------------------------
-// 2. Verificar se um número é par
+// Verificar se um número é par
 // -----------------------------------------
 int ehPar(int n) {
 return n % 2 == 0;
@@ -23,16 +23,7 @@ return n % 2 == 0;
 
 
 // -----------------------------------------
-// 3. Fatorial (recursão)
-// -----------------------------------------
-int fatorial(int n) {
-if (n == 0) return 1;
-return n * fatorial(n - 1);
-}
-
-
-// -----------------------------------------
-// 4. Soma de elementos de um array
+// Soma de elementos de um array
 // -----------------------------------------
 int somaLista(int arr[], int tamanho) {
 int soma = 0;
@@ -44,7 +35,7 @@ return soma;
 
 
 // -----------------------------------------
-// 5. Filtrar nomes (simulação)
+// Filtrar nomes (simulação)
 // -----------------------------------------
 void filtrarNomes(char nomes[][50], int tamanho) {
 for (int i = 0; i < tamanho; i++) {
@@ -56,32 +47,7 @@ printf("%s\n", nomes[i]);
 
 
 // -----------------------------------------
-// 6. QuickSort
-// -----------------------------------------
-void quicksort(int arr[], int inicio, int fim) {
-int i = inicio, j = fim;
-int pivo = arr[(inicio + fim) / 2];
-
-while (i <= j) {
-while (arr[i] < pivo) i++;
-while (arr[j] > pivo) j--;
-
-if (i <= j) {
-int temp = arr[i];
-arr[i] = arr[j];
-arr[j] = temp;
-i++;
-j--;
-}
-}
-
-if (inicio < j) quicksort(arr, inicio, j);
-if (i < fim) quicksort(arr, i, fim);
-}
-
-
-// -----------------------------------------
-// 7. Fibonacci (sem lazy evaluation)
+// Fibonacci (sem lazy evaluation)
 // -----------------------------------------
 int fib(int n) {
 if (n <= 1) return n;
@@ -90,7 +56,7 @@ return fib(n - 1) + fib(n - 2);
 
 
 // -----------------------------------------
-// 8. Simulação de "SELECT"
+// Simulação de "SELECT"
 // -----------------------------------------
 typedef struct {
 int id;
@@ -104,36 +70,6 @@ printf("%s\n", usuarios[i].nome);
 }
 }
 }
-
-
-// -----------------------------------------
-// 9. Função de função (simulação)
-// -----------------------------------------
-int somarCinco(int x) {
-return x + 5;
-}
-
-int dobro2(int x) {
-return x * 2;
-}
-
-int dobroMaisCinco(int x) {
-return dobro2(somarCinco(x));
-}
-
-
-// -----------------------------------------
-// 10. Currificação (simulação)
-// -----------------------------------------
-int soma(int x, int y) {
-return x + y;
-}
-
-// "Aplicação parcial" simulada
-int somar10(int y) {
-return soma(10, y);
-}
-
 
 // -----------------------------------------
 // Função principal (teste)
